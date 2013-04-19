@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "3e31a2dda7d03e1252c8e8fa9789dd81",
+    "hash": "e896cbdae5b6dacb109fa3fb43514e54",
     "packages": [
         {
             "name": "php-jsonpointer/php-jsonpointer",
@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/raphaelstolt/php-jsonpointer.git",
-                "reference": "bca227653f6c749cc7f058beac73ee7e0078bc14"
+                "reference": "v1.0.0-RC2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/bca227653f6c749cc7f058beac73ee7e0078bc14",
-                "reference": "bca227653f6c749cc7f058beac73ee7e0078bc14",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/v1.0.0-RC2",
+                "reference": "v1.0.0-RC2",
                 "shasum": ""
             },
             "require": {
@@ -34,7 +34,7 @@
                     "Rs\\Json": "src/"
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -52,7 +52,7 @@
                 "json pointer",
                 "json traversal"
             ],
-            "time": "2013-04-17 18:26:35"
+            "time": "2013-04-19 19:44:29"
         },
         {
             "name": "seld/jsonlint",
@@ -112,9 +112,9 @@
     "stability-flags": {
         "php-jsonpointer/php-jsonpointer": 20
     },
-    "platform": [
-
-    ],
+    "platform": {
+        "php": ">=5.3.0"
+    },
     "platform-dev": [
 
     ]
