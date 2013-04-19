@@ -1,0 +1,26 @@
+{
+    "name": "php-jsonpatch/php-jsonpatch",
+    "description": "Implementation of JSON Patch (http://tools.ietf.org/html/rfc6902)",
+    "keywords": ["json", "json patch", "json modification"],
+    "homepage": "https://github.com/raphaelstolt/php-jsonpatch",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Raphael Stolt",
+            "email": "raphael.stolt@gmail.com",
+            "homepage": "http://raphaelstolt.blogspot.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/raphaelstolt/php-jsonpatch/issues"
+    },
+    "require": {
+        "php-jsonpointer/php-jsonpointer": "master-dev"
+    },
+    "autoload": {
+        "psr-0": {
+        "Json": "src/"
+    }
+  }
+}
