@@ -13,11 +13,12 @@ This is an implementation of [JSON Patch](http://tools.ietf.org/html/rfc6902) wr
 Download the [`composer.phar`](http://getcomposer.org/composer.phar) executable if nonexistent.
 
 Create or modify **composer.json** in the \_\_ROOT_DIRECTORY__ of your project by adding the `php-jsonpatch/php-jsonpatch` dependency.
-    
+
     {
         "require": {
             "php-jsonpatch/php-jsonpatch": "dev-master"
-        }
+        },
+        "minimum-stability": "dev"
     }
 
 Run Composer: `php composer.phar install` or `php composer.phar update`
