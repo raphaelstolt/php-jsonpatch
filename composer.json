@@ -21,7 +21,13 @@
     },
     "autoload": {
         "psr-0": {
-        "Rs\\Json": "src/"
+            "Rs\\Json": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
     }
-  }
 }
