@@ -3,11 +3,11 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "e896cbdae5b6dacb109fa3fb43514e54",
+    "hash": "f476c9ce7b2807f799c2f2ae15804c0b",
     "packages": [
         {
             "name": "php-jsonpointer/php-jsonpointer",
-            "version": "dev-master",
+            "version": "v1.0.0-RC2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/raphaelstolt/php-jsonpointer.git",
@@ -110,7 +110,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "php-jsonpointer/php-jsonpointer": 20
+        "php-jsonpointer/php-jsonpointer": 5
     },
     "platform": {
         "php": ">=5.3.0"
