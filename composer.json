@@ -17,7 +17,7 @@
     },
     "require": {
         "php": ">=5.3.0",
-        "php-jsonpointer/php-jsonpointer": "1.0-dev"
+        "php-jsonpointer/php-jsonpointer": "master-dev"
     },
     "autoload": {
         "psr-0": {
