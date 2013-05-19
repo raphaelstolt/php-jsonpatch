@@ -9,7 +9,7 @@ use Seld\JsonLint\ParsingException;
 
 class Patch
 {
-    const MEDIA_TYPE = "application/json-patch+json";
+    const CONTENT_TYPE = "application/json-patch+json";
 
     /**
      * @var string
