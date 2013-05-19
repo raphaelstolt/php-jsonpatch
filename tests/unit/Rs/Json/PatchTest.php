@@ -10,7 +10,7 @@ class PatchTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldHaveExpectedMediaTypeDefined()
     {
-        $this->assertEquals('application/json-patch+json', Patch::CONTENT_TYPE);
+        $this->assertEquals('application/json-patch+json', Patch::MEDIA_TYPE);
     }
     /**
      * @test
