@@ -40,6 +40,7 @@ class Patch
 
     /**
      * @return string
+     * @throws Rs\Json\Patch\FailedTestException
      */
     public function apply()
     {
@@ -48,8 +49,8 @@ class Patch
         foreach ($patchOperations as $index => $patchOperation) {
             $targetDocument = $patchOperation->perform($patchedDocument);
             if ($patchOperation instanceof Test && $targetDocument === false) {
-                $exceptionMessage = 'Failed on Test PatchOperation at Index : '. $index;
-                throw new FailedTestException($exceptionMessage,$index);
+                $exceptionMessage = 'Failed on Test PatchOperation at index: ' . $index;
+                throw new FailedTestException($exceptionMessage);
             } elseif (!$patchOperation instanceof Test) {
                 $patchedDocument = $targetDocument;
             } 
