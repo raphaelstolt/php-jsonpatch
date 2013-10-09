@@ -8,7 +8,7 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @expectedException Rs\Json\Patch\FailedTestException
-     * @expectedExceptionMessage Failed on Test PatchOperation at Index :
+     * @expectedExceptionMessage Failed on Test PatchOperation at index:
      */
     public function shouldThrowFailedTestExceptionWhenTestFails()
     {
@@ -29,7 +29,7 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @expectedException Rs\Json\Patch\FailedTestException
-     * @expectedExceptionMessage Failed on Test PatchOperation at Index :
+     * @expectedExceptionMessage Failed on Test PatchOperation at index:
      */
     public function shouldThrowFailedTestExceptionWhenTestFailsForPriorPatch()
     {
@@ -50,7 +50,7 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @expectedException Rs\Json\Patch\FailedTestException
-     * @expectedExceptionMessage Failed on Test PatchOperation at Index :
+     * @expectedExceptionMessage Failed on Test PatchOperation at index:
      */
     public function shouldThrowFailedTestExceptionWhenUsingPointerEscapes()
     {
@@ -68,7 +68,7 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @expectedException Rs\Json\Patch\FailedTestException
-     * @expectedExceptionMessage Failed on Test PatchOperation at Index :
+     * @expectedExceptionMessage Failed on Test PatchOperation at index:
      */
     public function shouldThrowFailedTestExceptionWhenTestFailsForUnsuccessfulComparison()
     {
