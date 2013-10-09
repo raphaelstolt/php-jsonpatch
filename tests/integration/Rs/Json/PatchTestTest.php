@@ -7,8 +7,10 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
+     * @expectedException Rs\Json\Patch\FailedTestException
+     * @expectedExceptionMessage Failed on Test PatchOperation at Index :
      */
-    public function shouldReturnTargetDocumentWhenTestFails()
+    public function shouldThrowFailedTestExceptionWhenTestFails()
     {
         $expectedDocument = $targetDocument = '{"foo":"bar"}';
         $patchDocument = '[
@@ -26,8 +28,10 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * @test
+     * @expectedException Rs\Json\Patch\FailedTestException
+     * @expectedExceptionMessage Failed on Test PatchOperation at Index :
      */
-    public function shouldReturnTargetDocumentWhenTestFailsForPriorPatch()
+    public function shouldThrowFailedTestExceptionWhenTestFailsForPriorPatch()
     {
         $expectedDocument = $targetDocument = '{"a":{"b":{"c": 100}}}';
         $patchDocument = '[
@@ -45,8 +49,10 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * @test
+     * @expectedException Rs\Json\Patch\FailedTestException
+     * @expectedExceptionMessage Failed on Test PatchOperation at Index :
      */
-    public function shouldReturnTargetDocumentWhenUsingPointerEscapes()
+    public function shouldThrowFailedTestExceptionWhenUsingPointerEscapes()
     {
         $expectedDocument = $targetDocument = '{"/": 9, " ~1": 10}';
         $patchDocument = '[ {"op":"test", "path":"/~01", "value": 10} ]';
@@ -61,8 +67,10 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * @test
+     * @expectedException Rs\Json\Patch\FailedTestException
+     * @expectedExceptionMessage Failed on Test PatchOperation at Index :
      */
-    public function shouldReturnTargetDocumentWhenTestFailsForUnsuccessfulComparison()
+    public function shouldThrowFailedTestExceptionWhenTestFailsForUnsuccessfulComparison()
     {
         $expectedDocument = $targetDocument = '{"/": 9, " ~1": 10}';
         $patchDocument = '[ {"op":"test", "path":"/~01", "value":"10"} ]';

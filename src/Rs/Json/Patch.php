@@ -4,6 +4,7 @@ namespace Rs\Json;
 use Rs\Json\Patch\Document;
 use Rs\Json\Patch\Operations\Test;
 use Rs\Json\Patch\InvalidJsonException;
+use Rs\Json\Patch\FailedTestException;
 use Seld\JsonLint\JsonParser;
 use Seld\JsonLint\ParsingException;
 
@@ -44,10 +45,11 @@ class Patch
     {
         $patchOperations = $this->jsonPatchDocument->getPatchOperations();
         $patchedDocument = $this->targetDocument;
-        foreach ($patchOperations as $patchOperation) {
+        foreach ($patchOperations as $index => $patchOperation) {
             $targetDocument = $patchOperation->perform($patchedDocument);
             if ($patchOperation instanceof Test && $targetDocument === false) {
-                return $this->targetDocument;
+                $exceptionMessage = 'Failed on Test PatchOperation at Index : '. $index;
+                throw new FailedTestException($exceptionMessage,$index);
             } elseif (!$patchOperation instanceof Test) {
                 $patchedDocument = $targetDocument;
             } 
