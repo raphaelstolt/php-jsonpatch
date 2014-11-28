@@ -64,6 +64,8 @@ class Remove extends Operation
             }
         } elseif ($pointerPart === Pointer::LAST_ARRAY_ELEMENT_CHAR && is_array($json)) {
             unset($json[count($json) - 1]);
+        } else {
+            unset($json[$pointerPart]);
         }
     }
 }
