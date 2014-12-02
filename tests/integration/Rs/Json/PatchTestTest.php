@@ -85,8 +85,10 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * @test
+     * @expectedException Rs\Json\Pointer\InvalidPointerException
+     * @expectedExceptionMessage Pointer starts with invalid character
      */
-    public function shouldAllowUsageOfUriFragmentIdentifierInPatch()
+    public function shouldThrowExceptionOnUsageOfUriFragmentIdentifierInPatch()
     {
         $targetDocument = '{"foo":"bar"}';
         $patchDocument = '[{"op":"add", "path":"#/baz", "value":[1,2,3]}]';
@@ -94,10 +96,5 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
 
         $patch = new Patch($targetDocument, $patchDocument);
         $patchedDocument = $patch->apply();
-
-        $this->assertJsonStringEqualsJsonString(
-            $expectedDocument,
-            $patchedDocument
-        );
     }
 }

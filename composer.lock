@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f11c68bc2f6bb240e9312e0248805398",
+    "hash": "82a4d9032d7a5b6a72f94b2e39dbaea4",
     "packages": [
         {
             "name": "php-jsonpointer/php-jsonpointer",
-            "version": "v1.0.0-RC2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/raphaelstolt/php-jsonpointer.git",
-                "reference": "e2f248bd0fa0f225cf1f9e39fca81fd015a657c5"
+                "reference": "60037a6f306db93d83962bd8bcf39fade4c65f65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/e2f248bd0fa0f225cf1f9e39fca81fd015a657c5",
-                "reference": "e2f248bd0fa0f225cf1f9e39fca81fd015a657c5",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/60037a6f306db93d83962bd8bcf39fade4c65f65",
+                "reference": "60037a6f306db93d83962bd8bcf39fade4c65f65",
                 "shasum": ""
             },
             "require": {
@@ -27,7 +27,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -53,7 +53,7 @@
                 "json pointer",
                 "json traversal"
             ],
-            "time": "2013-04-19 19:44:29"
+            "time": "2014-12-02 19:43:33"
         },
         {
             "name": "seld/jsonlint",
