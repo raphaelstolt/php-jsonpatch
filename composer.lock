@@ -1,9 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "42d4cc88a7df2a964797578e1849afcd",
+    "hash": "c3e02d0afd8eab6b70093fc871c10fbe",
     "packages": [
         {
             "name": "php-jsonpointer/php-jsonpointer",
@@ -11,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/raphaelstolt/php-jsonpointer.git",
-                "reference": "e2f248bd0fa0f225cf1f9e39fca81fd015a657c5"
+                "reference": "d9e9ac1202b8f5a3baa0e17db8265a60f3b9a9c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/e2f248bd0fa0f225cf1f9e39fca81fd015a657c5",
-                "reference": "e2f248bd0fa0f225cf1f9e39fca81fd015a657c5",
+                "url": "https://api.github.com/repos/raphaelstolt/php-jsonpointer/zipball/d9e9ac1202b8f5a3baa0e17db8265a60f3b9a9c4",
+                "reference": "d9e9ac1202b8f5a3baa0e17db8265a60f3b9a9c4",
                 "shasum": ""
             },
             "require": {
@@ -52,20 +53,20 @@
                 "json pointer",
                 "json traversal"
             ],
-            "time": "2013-04-19 19:44:29"
+            "time": "2013-10-28 16:00:39"
         },
         {
             "name": "seld/jsonlint",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
-                "url": "http://github.com/Seldaek/jsonlint",
-                "reference": "1.1.1"
+                "url": "https://github.com/Seldaek/jsonlint.git",
+                "reference": "7cd4c4965e17e6e4c07f26d566619a4c76f8c672"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/jsonlint/zipball/1.1.1",
-                "reference": "1.1.1",
+                "url": "https://api.github.com/repos/Seldaek/jsonlint/zipball/7cd4c4965e17e6e4c07f26d566619a4c76f8c672",
+                "reference": "7cd4c4965e17e6e4c07f26d566619a4c76f8c672",
                 "shasum": ""
             },
             "require": {
@@ -80,7 +81,7 @@
                     "Seld\\JsonLint": "src/"
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -99,23 +100,18 @@
                 "parser",
                 "validator"
             ],
-            "time": "2013-02-11 23:03:12"
+            "time": "2013-11-04 15:41:11"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "php-jsonpointer/php-jsonpointer": 20
     },
+    "prefer-stable": false,
     "platform": {
         "php": ">=5.3.0"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }
