@@ -6,8 +6,6 @@ use Rs\Json\Patch\Operations\Test;
 use Rs\Json\Patch\InvalidPatchDocumentJsonException;
 use Rs\Json\Patch\InvalidTargetDocumentJsonException;
 use Rs\Json\Patch\FailedTestException;
-use Seld\JsonLint\JsonParser;
-use Seld\JsonLint\ParsingException;
 
 class Patch
 {
