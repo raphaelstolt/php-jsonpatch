@@ -15,7 +15,7 @@ class PatchTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @expectedException Rs\Json\Patch\InvalidJsonException
-     * @expectedExceptionMessage Cannot operate on invalid Json. Message:
+     * @expectedExceptionMessage Cannot operate on invalid Json.
      * @dataProvider invalidJsonProvider
      */
     public function shouldThrowExpectedExceptionOnInvalidTargetDocument($invalidJson)
@@ -25,7 +25,7 @@ class PatchTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @expectedException Rs\Json\Patch\InvalidJsonException
-     * @expectedExceptionMessage Cannot operate on invalid Json. Message:
+     * @expectedExceptionMessage Cannot operate on invalid Json.
      * @dataProvider invalidJsonProvider
      */
     public function shouldThrowExpectedExceptionOnInvalidPatchDocument($invalidJson)
