@@ -1,3 +1,5 @@
+### 1.2.0-RC1
+  * More fine-grained exceptions for invalid Json documents, fixes issue [#3](https://github.com/raphaelstolt/php-jsonpatch/issues/3)
 ### 1.1.0-RC1
   * Uses [JSON Pointer](https://github.com/raphaelstolt/php-jsonpointer) the handling of special URI Fragment identifier #
 

@@ -3,7 +3,8 @@ namespace Rs\Json;
 
 use Rs\Json\Patch\Document;
 use Rs\Json\Patch\Operations\Test;
-use Rs\Json\Patch\InvalidJsonException;
+use Rs\Json\Patch\InvalidPatchDocumentJsonException;
+use Rs\Json\Patch\InvalidTargetDocumentJsonException;
 use Rs\Json\Patch\FailedTestException;
 use Seld\JsonLint\JsonParser;
 use Seld\JsonLint\ParsingException;
@@ -25,18 +26,19 @@ class Patch
     /**
      * @param string $targetDocument
      * @param string $patchDocument
-     * @throws Rs\Json\Patch\InvalidJsonException
+     * @throws Rs\Json\Patch\InvalidTargetDocumentJsonException
+     * @throws Rs\Json\Patch\InvalidPatchDocumentJsonException
      */
     public function __construct($targetDocument, $patchDocument)
     {
         json_decode($targetDocument, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new InvalidJsonException('Cannot operate on invalid Json.');
+            throw new InvalidTargetDocumentJsonException('Cannot operate on invalid Json.');
         }
 
         json_decode($patchDocument, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new InvalidJsonException('Cannot operate on invalid Json.');
+            throw new InvalidPatchDocumentJsonException('Cannot operate on invalid Json.');
         }
 
         $this->targetDocument = $targetDocument;
