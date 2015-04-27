@@ -36,7 +36,8 @@ thrown.
     require_once 'vendor/autoload.php';
 
     use Rs\Json\Patch;
-    use Rs\Json\Patch\InvalidJsonException;
+    use Rs\Json\Patch\InvalidPatchDocumentJsonException;
+    use Rs\Json\Patch\InvalidTargetDocumentJsonException;
     use Rs\Json\Patch\InvalidOperationException;
 
     try {
@@ -59,8 +60,10 @@ thrown.
 
         $patch = new Patch($targetDocument, $patchDocument);
         $patchedDocument = $patch->apply(); // {"a":{"b":["c","d","e"],"c":["a","b"],"e":["a"]}}
-    } catch (InvalidJsonException $e) { 
-        // Will be thrown when using invalid JSON in a target document or patch document
+    } catch (InvalidPatchDocumentJsonException $e) {
+        // Will be thrown when using invalid JSON in a patch document
+    } catch (InvalidTargetDocumentJsonException $e) {
+        // Will be thrown when using invalid JSON in a target document
     } catch (InvalidOperationException $e) {
         // Will be thrown when using an invalid JSON Pointer operation (i.e. missing property)
     }
