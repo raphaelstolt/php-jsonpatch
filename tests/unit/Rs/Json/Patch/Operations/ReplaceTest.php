@@ -55,6 +55,28 @@ class ReplaceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     * @ticket 5 (https://github.com/raphaelstolt/php-jsonpatch/issues/5)
+     */
+    public function shouldReplaceWhenPathValueIsNull()
+    {
+        $targetJson = '{"foo":"bar","baz":null}';
+
+        $operation = new \stdClass;
+        $operation->path = '/baz';
+        $operation->value = 'bing';
+
+        $expectedJson = '{"foo":"bar","baz":"bing"}';
+
+        $addOperation = new Replace($operation);
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedJson,
+            $addOperation->perform($targetJson)
+        );
+    }
+
+    /**
      * @return array
      */
     public function replaceProvider()

@@ -71,7 +71,7 @@ class Replace extends Operation
             $value = $this->getValue();
         }
 
-        if (isset($json[$pointerPart])) {
+        if (array_key_exists($pointerPart, $json)) {
             if (count($pointerParts) === 0) {
                 $json[$pointerPart] = $value;
             } else {
