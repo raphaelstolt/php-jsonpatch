@@ -27,7 +27,7 @@ Run Composer: `php composer.phar install` or `php composer.phar update`
 
 Now you can use JSON Patch for PHP via the available Composer **autoload file**.
 
-Patch operations are defined in JSON and bundled in an array. Available JSON Patch 
+Patch operations are defined in JSON and bundled in an array. Available JSON Patch
 [operations](http://tools.ietf.org/html/rfc6902#section-4) are `add`, `remove`, `replace`, `move`, `copy`,
 and `test`; if their mandatory properties are not set a `Rs\Json\Patch\InvalidOperationException` will be
 thrown.
@@ -71,7 +71,7 @@ thrown.
 For some more usage examples of JSON Patch operations have a look at the
 integration tests located under `tests/integration/*`.
 
-## Testing (PHPUnit 3.7.*)
+## Testing
 
     $ phpunit
 
