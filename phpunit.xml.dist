@@ -5,22 +5,20 @@
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
-         forceCoversAnnotation="false"
-         mapTestClassNameToCoveredClassName="false"
          processIsolation="false"
-         stopOnError="false"
-         stopOnFailure="false"
-         stopOnIncomplete="false"
-         stopOnSkipped="false"
-         syntaxCheck="false"
-         testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader"
-         verbose="false">
+         stopOnFailure="true"
+         syntaxCheck="false">
 <testsuites for="Json Patch">
   <testsuite name="unit">
-    <directory>./tests/unit</directory>
+    <directory>tests/unit/</directory>
   </testsuite>
   <testsuite name="integration">
-    <directory>./tests/integration</directory>
+    <directory>tests/integration/</directory>
   </testsuite>
 </testsuites>
+<filter>
+  <whitelist>
+    <directory suffix=".php">src/</directory>
+  </whitelist>
+</filter>
 </phpunit>
