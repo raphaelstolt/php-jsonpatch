@@ -46,6 +46,7 @@ class Copy extends Operation
 
     /**
      * @param  string $targetDocument
+     *
      * @return string
      */
     public function perform($targetDocument)
@@ -58,7 +59,7 @@ class Copy extends Operation
         }
 
         if ($this->getFrom() === $this->getPath()) {
-            return $targetDocument; 
+            return $targetDocument;
         }
 
         $operation = new \stdClass;
@@ -66,6 +67,7 @@ class Copy extends Operation
         $operation->value = $get;
 
         $add = new Add($operation);
+
         return $add->perform($targetDocument);
     }
 }

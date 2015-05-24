@@ -46,6 +46,7 @@ class Move extends Operation
 
     /**
      * @param  string $targetDocument
+     *
      * @return string
      */
     public function perform($targetDocument)
@@ -72,6 +73,7 @@ class Move extends Operation
         $addOperation->value = $get;
 
         $add = new Add($addOperation);
+
         return $add->perform($targetDocument);
     }
 }

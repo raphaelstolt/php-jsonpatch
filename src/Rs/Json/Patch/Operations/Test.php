@@ -32,6 +32,7 @@ class Test extends Operation
 
     /**
      * @param  string $targetDocument
+     *
      * @return boolean
      */
     public function perform($targetDocument)
@@ -53,6 +54,7 @@ class Test extends Operation
         if (is_array($value) && is_array($get)) {
             asort($get);
             asort($value);
+
             return json_encode($get) === json_encode($value);
         }
 

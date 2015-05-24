@@ -32,6 +32,7 @@ class Add extends Operation
 
     /**
      * @param  string $targetDocument
+     *
      * @return string
      */
     public function perform($targetDocument)

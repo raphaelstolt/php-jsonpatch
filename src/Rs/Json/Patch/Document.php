@@ -18,7 +18,7 @@ class Document
     private $patchOperations;
 
     /**
-     * @param string $patchDocument
+     * @param  string $patchDocument
      * @throws Rs\Json\Patch\InvalidOperationException
      */
     public function __construct($patchDocument)
@@ -37,12 +37,13 @@ class Document
     /**
      * @param  string $patchDocument The patch document containing the patch operations.
      * @throws Rs\Json\Patch\InvalidOperationException
+     *
      * @return array
      */
     private function extractPatchOperations($patchDocument)
     {
         $patchDocument = json_decode($patchDocument);
-        
+
         if ($this->isEmptyPatchDocument($patchDocument)) {
             $exceptionMessage = sprintf(
                 "Unable to extract patch operations from '%s'",
@@ -75,8 +76,9 @@ class Document
 
     /**
      * @param  \stdClass $possiblePatchOperation
-     * @return Rs\Json\Patch\Operation or null on unsupported patch operation
      * @throws Rs\Json\Patch\InvalidOperationException
+     *
+     * @return Rs\Json\Patch\Operation or null on unsupported patch operation
      */
     private function patchOperationFactory(\stdClass $possiblePatchOperation)
     {

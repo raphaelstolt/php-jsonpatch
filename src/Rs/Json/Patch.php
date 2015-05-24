@@ -22,8 +22,8 @@ class Patch
     private $patchDocument;
 
     /**
-     * @param string $targetDocument
-     * @param string $patchDocument
+     * @param  string $targetDocument
+     * @param  string $patchDocument
      * @throws Rs\Json\Patch\InvalidTargetDocumentJsonException
      * @throws Rs\Json\Patch\InvalidPatchDocumentJsonException
      */
@@ -44,8 +44,9 @@ class Patch
     }
 
     /**
-     * @return string
      * @throws Rs\Json\Patch\FailedTestException
+     *
+     * @return string
      */
     public function apply()
     {
@@ -58,7 +59,7 @@ class Patch
                 throw new FailedTestException($exceptionMessage);
             } elseif (!$patchOperation instanceof Test) {
                 $patchedDocument = $targetDocument;
-            } 
+            }
         }
         return $patchedDocument;
     }

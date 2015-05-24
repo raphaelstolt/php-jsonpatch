@@ -82,6 +82,7 @@ abstract class Operation
 
     /**
      * @param  string $targetDocument
+     *
      * @return mixed
      */
     abstract public function perform($targetDocument);

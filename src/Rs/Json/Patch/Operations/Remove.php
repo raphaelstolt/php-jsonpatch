@@ -19,12 +19,13 @@ class Remove extends Operation
     /**
      * Guard the mandatory operation properties
      *
-     * @param  \stdClass $operation The operation structure.
+     * @param \stdClass $operation The operation structure.
      */
     protected function assertMandatories(\stdClass $operation) {}
 
     /**
      * @param  string $targetDocument
+     *
      * @return string
      */
     public function perform($targetDocument)
