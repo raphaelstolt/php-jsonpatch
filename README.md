@@ -10,18 +10,9 @@ This is an implementation of [JSON Patch](http://tools.ietf.org/html/rfc6902) wr
 
 ## Installation via Composer
 
-Download the [`composer.phar`](http://getcomposer.org/composer.phar) executable if nonexistent.
-
-Create or modify **composer.json** in the \_\_ROOT_DIRECTORY__ of your project by adding the `php-jsonpatch/php-jsonpatch` dependency.
-
-    {
-        "require": {
-            "php-jsonpatch/php-jsonpatch": "dev-master"
-        },
-        "minimum-stability": "dev"
-    }
-
-Run Composer: `php composer.phar install` or `php composer.phar update`
+``` bash
+$ composer require php-jsonpatch/php-jsonpatch
+```
 
 ## Usage
 
@@ -32,6 +23,7 @@ Patch operations are defined in JSON and bundled in an array. Available JSON Pat
 and `test`; if their mandatory properties are not set a `Rs\Json\Patch\InvalidOperationException` will be
 thrown.
 
+``` php
     <?php
     require_once 'vendor/autoload.php';
 
@@ -67,14 +59,15 @@ thrown.
     } catch (InvalidOperationException $e) {
         // Will be thrown when using an invalid JSON Pointer operation (i.e. missing property)
     }
-
+```
 For some more usage examples of JSON Patch operations have a look at the
 integration tests located under `tests/integration/*`.
 
 ## Testing
 
+``` bash
     $ phpunit
-
+```
 ## License
 
-This library is licensed under the MIT License. Please see [License File](LICENSE.md) for more information.
+This library is licensed under the MIT License. Please see [License file](LICENSE.md) for more information.
