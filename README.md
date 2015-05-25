@@ -77,4 +77,4 @@ integration tests located under `tests/integration/*`.
 
 ## License
 
-JSON Patch for PHP is licensed under the MIT License
+This library is licensed under the MIT License. Please see [License File](LICENSE.md) for more information.
