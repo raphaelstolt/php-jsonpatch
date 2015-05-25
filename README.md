@@ -24,41 +24,40 @@ and `test`; if their mandatory properties are not set a `Rs\Json\Patch\InvalidOp
 thrown.
 
 ``` php
-    <?php
-    require_once 'vendor/autoload.php';
+<?php require_once 'vendor/autoload.php';
 
-    use Rs\Json\Patch;
-    use Rs\Json\Patch\InvalidPatchDocumentJsonException;
-    use Rs\Json\Patch\InvalidTargetDocumentJsonException;
-    use Rs\Json\Patch\InvalidOperationException;
+use Rs\Json\Patch;
+use Rs\Json\Patch\InvalidPatchDocumentJsonException;
+use Rs\Json\Patch\InvalidTargetDocumentJsonException;
+use Rs\Json\Patch\InvalidOperationException;
 
-    try {
-        $targetDocument = '{"a":{"b":["c","d","e"]}}';
+try {
+    $targetDocument = '{"a":{"b":["c","d","e"]}}';
 
-        $patchDocument = '[
-          {"op":"add", "path":"/a/d", "value":["a","b"]}, // {"a":{"b":["c","d","e"],"d":["a","b"]}}
-          {"op":"test", "path":"/a/d/-", "value":"b"}, // previous target document
-          {"op":"remove", "path":"/a/d/-"}, // {"a":{"b":["c","d","e"],"d":["a"]}}
-          {"op":"test", "path":"/a/d/-", "value":"a"}, // previous target document
-          {"op":"add", "path":"/a/d/-", "value":"b"}, // {"a":{"b":["c","d","e"],"d":["a","b"]}}
-          {"op":"test", "path":"/a/d", "value":["a","b"]}, // previous target document
-          {"op":"move", "path":"/a/c", "from":"/a/d"}, // {"a":{"b":["c","d","e"],"c":["a","b"]}}
-          {"op":"test", "path":"/a/c", "value":["a","b"]}, // previous target document
-          {"op":"copy", "path":"/a/e", "from":"/a/c"}, // {"a":{"b":["c","d","e"],"c":["a","b"],"e":["a","b"]}}
-          {"op":"test", "path":"/a/e", "value":["a","b"]}, // previous target document
-          {"op":"replace", "path":"/a/e", "value":["a"]}, // {"a":{"b":["c","d","e"],"c":["a","b"],"e":["a"]}}
-          {"op":"test", "path":"/a/e", "value":["a"]} // previous target document
-        ]';
+    $patchDocument = '[
+        {"op":"add", "path":"/a/d", "value":["a","b"]}, // {"a":{"b":["c","d","e"],"d":["a","b"]}}
+        {"op":"test", "path":"/a/d/-", "value":"b"}, // previous target document
+        {"op":"remove", "path":"/a/d/-"}, // {"a":{"b":["c","d","e"],"d":["a"]}}
+        {"op":"test", "path":"/a/d/-", "value":"a"}, // previous target document
+        {"op":"add", "path":"/a/d/-", "value":"b"}, // {"a":{"b":["c","d","e"],"d":["a","b"]}}
+        {"op":"test", "path":"/a/d", "value":["a","b"]}, // previous target document
+        {"op":"move", "path":"/a/c", "from":"/a/d"}, // {"a":{"b":["c","d","e"],"c":["a","b"]}}
+        {"op":"test", "path":"/a/c", "value":["a","b"]}, // previous target document
+        {"op":"copy", "path":"/a/e", "from":"/a/c"}, //   {"a":{"b":["c","d","e"],"c":["a","b"],"e":["a","b"]}}
+        {"op":"test", "path":"/a/e", "value":["a","b"]}, // previous target document
+        {"op":"replace", "path":"/a/e", "value":["a"]}, // {"a":{"b":["c","d","e"],"c":["a","b"],"e":["a"]}}
+        {"op":"test", "path":"/a/e", "value":["a"]} // previous target document
+    ]';
 
-        $patch = new Patch($targetDocument, $patchDocument);
-        $patchedDocument = $patch->apply(); // {"a":{"b":["c","d","e"],"c":["a","b"],"e":["a"]}}
-    } catch (InvalidPatchDocumentJsonException $e) {
-        // Will be thrown when using invalid JSON in a patch document
-    } catch (InvalidTargetDocumentJsonException $e) {
-        // Will be thrown when using invalid JSON in a target document
-    } catch (InvalidOperationException $e) {
-        // Will be thrown when using an invalid JSON Pointer operation (i.e. missing property)
-    }
+    $patch = new Patch($targetDocument, $patchDocument);
+    $patchedDocument = $patch->apply(); // {"a":{"b":["c","d","e"],"c":["a","b"],"e":["a"]}}
+} catch (InvalidPatchDocumentJsonException $e) {
+    // Will be thrown when using invalid JSON in a patch document
+} catch (InvalidTargetDocumentJsonException $e) {
+    // Will be thrown when using invalid JSON in a target document
+} catch (InvalidOperationException $e) {
+    // Will be thrown when using an invalid JSON Pointer operation (i.e. missing property)
+}
 ```
 For some more usage examples of JSON Patch operations have a look at the
 integration tests located under `tests/integration/*`.
@@ -66,7 +65,7 @@ integration tests located under `tests/integration/*`.
 ## Testing
 
 ``` bash
-    $ phpunit
+$ phpunit
 ```
 ## License
 
