@@ -65,7 +65,7 @@ integration tests located under `tests/integration/*`.
 ## Testing
 
 ``` bash
-$ phpunit
+$ composer test
 ```
 ## License
 
