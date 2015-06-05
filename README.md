@@ -11,7 +11,7 @@ This is an implementation of [JSON Patch](http://tools.ietf.org/html/rfc6902) wr
 ## Installation via Composer
 
 ``` bash
-$ composer require php-jsonpatch/php-jsonpatch
+$ composer require php-jsonpatch/php-jsonpatch:1.2.*
 ```
 
 ## Usage
