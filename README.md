@@ -4,10 +4,6 @@
 
 This is an implementation of [JSON Patch](http://tools.ietf.org/html/rfc6902) written in PHP.
 
-## Dependencies (managed via [Composer](http://packagist.org/about-composer))
-
-[`JSON Pointer for PHP`](https://github.com/raphaelstolt/php-jsonpointer) by Raphael Stolt.
-
 ## Installation via Composer
 
 ``` bash
