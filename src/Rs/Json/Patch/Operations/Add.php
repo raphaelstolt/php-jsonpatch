@@ -90,7 +90,7 @@ class Add extends Operation
                     $targetArray[] = $this->getValue();
                 } else {
                     if (is_numeric($additionIndex)) {
-                        $replacement = is_array($this->getValue()) ? array($this->getValue()) : $this->getValue();
+                        $replacement = is_array($this->getValue()) || is_object($this->getValue()) ? array($this->getValue()) : $this->getValue();
                         array_splice($targetArray, $additionIndex, 0, $replacement);
                     } else {
                         $targetArray[$additionIndex] = $this->getValue();
