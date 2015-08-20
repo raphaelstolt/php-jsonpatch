@@ -1,3 +1,6 @@
+### v1.2.1
+  * Fixed issue [#6](https://github.com/raphaelstolt/php-jsonpatch/issues/6)
+
 ### v1.2.0
   * Official release
 
