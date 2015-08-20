@@ -116,6 +116,25 @@ class AddTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * @test
+     */
+    public function shouldAddAnArrayValueToSpecificIndexAsExpected()
+    {
+        $targetJson     = '{"foo":[{"name": "bar"},{"name": "baz"}]}';
+        $expectedJson   = '{"foo":[{"name": "bar"},{"name": "new"},{"name": "baz"}]}';
+
+        $operation = new \stdClass;
+        $operation->path = '/foo/1';
+        $operation->value = array('name' => 'new');
+
+        $addOperation = new Add($operation);
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedJson,
+            $addOperation->perform($targetJson)
+        );
+    }
+    /**
+     * @test
      * @dataProvider tooLargeArrayIndexProvider
      */
     public function shouldNotAddArrayElementWhenUsingATooLargeIndex($providerData)
