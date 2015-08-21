@@ -129,7 +129,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
     {
         $operation = new \stdClass;
         $operation->path = '/chars/array';
-        $operation->value = '["abc", "def"]';
+        $operation->value = array("abc", "def");
 
         $testOperation = new Test($operation);
 
@@ -142,7 +142,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
     {
         $operation = new \stdClass;
         $operation->path = '/chars/array';
-        $operation->value = '["def", "hij"]';
+        $operation->value = array("def", "hij");
 
         $testOperation = new Test($operation);
 
@@ -305,11 +305,11 @@ class TestTest extends \PHPUnit_Framework_TestCase
         return array(
             array(array(
                 'given-json' => '{"foo":"bar"}',
-                'test-operation' => (object) array('path' => '', 'value' => '{"foo":"bar"}'),
+                'test-operation' => (object) array('path' => '', 'value' => array("foo" => "bar")),
             )),
             array(array(
                 'given-json' => '{"foo":{"coo":{"koo":"roo","moo":"zoo"}}}',
-                'test-operation' => (object) array('path' => '/foo/coo', 'value' => '{"koo":"roo","moo":"zoo"}'),
+                'test-operation' => (object) array('path' => '/foo/coo', 'value' => array("koo" => "roo", "moo" => "zoo")),
             ))
         );
     }

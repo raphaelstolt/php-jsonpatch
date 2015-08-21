@@ -41,15 +41,15 @@ class Test extends Operation
 
         try {
             $get = $pointer->get($this->getPath());
+            // Pointer::get() method can return mixed result, we should force type to array for json string
+            if($this->isValidJsonString($get)) {
+                $get = json_decode($get, true);
+            }
         } catch (NonexistentValueReferencedException $e) {
             $get = null;
         }
 
-        if (is_string($this->getValue())) {
-            $value = json_decode($this->getValue(), true);
-        } else {
-            $value = $this->getValue();
-        }
+        $value = is_object($this->getValue()) ? (array) $this->getValue() : $this->getValue();
 
         if (is_array($value) && is_array($get)) {
             asort($get);
@@ -59,5 +59,21 @@ class Test extends Operation
         }
 
         return $get === $this->getValue();
+    }
+
+    /**
+     * Method check if string is valid JSON string
+     *
+     * @param $string
+     * @return boolean
+     */
+    private function isValidJsonString($string)
+    {
+        if(is_string($string) && strlen($string)) {
+            // Decode and check last error
+            json_decode($string);
+            return json_last_error() === JSON_ERROR_NONE;
+        }
+        return false;
     }
 }
