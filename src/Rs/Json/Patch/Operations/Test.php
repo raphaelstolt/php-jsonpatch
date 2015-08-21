@@ -49,7 +49,7 @@ class Test extends Operation
             $get = null;
         }
 
-        $value = is_object($this->getValue())? (array) $this->getValue() : $this->getValue();
+        $value = is_object($this->getValue()) ? (array) $this->getValue() : $this->getValue();
 
         if (is_array($value) && is_array($get)) {
             asort($get);
