@@ -88,19 +88,8 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
      */
     public function testSuccessfulComparison()
     {
-        $expectedDocument = $targetDocument = json_encode(
-            [
-                'arrayField' => [
-                    ['name' => 'foo'],
-                    ['name' => 'bar']
-                ]
-            ]
-        );
-        $patchDocument = json_encode(
-            [
-                ['op' => 'test', 'path' => '/arrayField/0', 'value' => ['name' => 'foo']]
-            ]
-        );
+        $expectedDocument = $targetDocument = '{"arrayField": [{"name":"foo"}, {"name":"bar"}]}';
+        $patchDocument = '[ {"op":"test", "path":"/arrayField/0", "value":{"name":"foo"}} ]';
 
         $patch = new Patch($targetDocument, $patchDocument);
         $patchedDocument = $patch->apply();
