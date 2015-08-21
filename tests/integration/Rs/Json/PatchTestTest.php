@@ -85,8 +85,9 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * @test
+     * @ticket 8 (https://github.com/raphaelstolt/php-jsonpatch/issues/8)
      */
-    public function testSuccessfulComparison()
+    public function shouldDoASuccessfulTestComparison()
     {
         $expectedDocument = $targetDocument = '{"arrayField": [{"name":"foo"}, {"name":"bar"}]}';
         $patchDocument = '[ {"op":"test", "path":"/arrayField/0", "value":{"name":"foo"}} ]';
