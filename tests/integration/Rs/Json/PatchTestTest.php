@@ -85,6 +85,33 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * @test
+     */
+    public function testSuccessfulComparison()
+    {
+        $expectedDocument = $targetDocument = json_encode(
+            [
+                'arrayField' => [
+                    ['name' => 'foo'],
+                    ['name' => 'bar']
+                ]
+            ]
+        );
+        $patchDocument = json_encode(
+            [
+                ['op' => 'test', 'path' => '/arrayField/0', 'value' => ['name' => 'foo']]
+            ]
+        );
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
+    /**
+     * @test
      * @expectedException Rs\Json\Pointer\InvalidPointerException
      * @expectedExceptionMessage Pointer starts with invalid character
      */
