@@ -81,4 +81,62 @@ class PatchAddTest extends \PHPUnit_Framework_TestCase
             $patchedDocument
         );
     }
+    /**
+     * @test
+     * @ticket 10 (https://github.com/raphaelstolt/php-jsonpatch/issues/10)
+     */
+    public function shouldAddNotReplace()
+    {
+        $targetDocument = '[
+            {"foo": "alpha"},
+            {"foo": "beta"},
+            {"foo": "gamma"}
+        ]';
+
+        $patchDocument = '[
+            {"op": "add", "path": "/1", "value": {"foo": "beta2"}},
+            {"op": "test", "path": "/2", "value": {"foo": "beta"}},
+            {"op": "remove", "path": "/2"}
+        ]';
+
+        $expectedDocument = '[
+            {"foo": "alpha"},
+            {"foo": "beta2"},
+            {"foo": "gamma"}
+        ]';
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
+    /**
+     * @test
+     */
+    public function shouldAddToSingleElementArray()
+    {
+        $targetDocument = '[
+            {"foo": "alpha"}
+        ]';
+
+        $patchDocument = '[
+            {"op": "add", "path": "/1", "value": {"foo": "beta"}}
+        ]';
+
+        $expectedDocument = '[
+            {"foo": "alpha"},
+            {"foo": "beta"}
+        ]';
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
 }
