@@ -1,3 +1,6 @@
+### v1.2.3
+  * Fixed issue [#10](https://github.com/raphaelstolt/php-jsonpatch/issues/10)
+
 ### v1.2.2
   * Fixed issue [#8](https://github.com/raphaelstolt/php-jsonpatch/issues/8)
 
