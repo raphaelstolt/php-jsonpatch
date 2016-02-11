@@ -19,7 +19,7 @@ class PatchRemoveTest extends \PHPUnit_Framework_TestCase
             array(
                 '{"a":null}',
                 '[ {"op":"remove", "path":"/a"} ]',
-                '[]'
+                '{}'
             ),
             array(
                 '{"a":{"b":["c","d",null]}}',
