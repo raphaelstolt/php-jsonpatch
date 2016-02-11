@@ -32,7 +32,7 @@ class Remove extends Operation
     {
         $pointer = new Pointer($targetDocument);
         try {
-            $get = $pointer->get($this->getPath());
+            $pointer->get($this->getPath());
         } catch (NonexistentValueReferencedException $e) {
             return $targetDocument;
         }

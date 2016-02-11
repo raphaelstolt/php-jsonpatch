@@ -1,8 +1,6 @@
 <?php
 namespace Rs\Json\Patch;
 
-use Rs\Json\Patch\InvalidOperationException;
-
 abstract class Operation
 {
     /**
@@ -23,7 +21,7 @@ abstract class Operation
     /**
      * @param  string     $op
      * @param  \stdClass  $operation
-     * @throws Rs\Json\Patch\InvalidOperationException
+     * @throws \Rs\Json\Patch\InvalidOperationException
      */
     public function __construct($op, \stdClass $operation)
     {
@@ -91,7 +89,7 @@ abstract class Operation
      * Guard the mandatory operation properties
      *
      * @param  \stdClass $operation The operation structure.
-     * @throws Rs\Json\Patch\InvalidOperationException
+     * @throws \Rs\Json\Patch\InvalidOperationException
      */
     abstract protected function assertMandatories(\stdClass $operation);
 }

@@ -21,7 +21,7 @@ class Add extends Operation
      * Guard the mandatory operation property
      *
      * @param  \stdClass $operation The operation structure.
-     * @throws Rs\Json\Patch\InvalidOperationException
+     * @throws \Rs\Json\Patch\InvalidOperationException
      */
     protected function assertMandatories(\stdClass $operation)
     {
