@@ -52,6 +52,9 @@ class Patch
     {
         $patchOperations = $this->jsonPatchDocument->getPatchOperations();
         $patchedDocument = $this->targetDocument;
+
+        $wasObject = '{' === mb_substr(trim($patchedDocument), 0, 1);
+
         foreach ($patchOperations as $index => $patchOperation) {
             $targetDocument = $patchOperation->perform($patchedDocument);
             if ($patchOperation instanceof Test && $targetDocument === false) {
@@ -61,6 +64,15 @@ class Patch
                 $patchedDocument = $targetDocument;
             }
         }
+
+        $emtpyArray = '[]';
+        $emptyObject = '{}';
+        if ($patchedDocument === $emtpyArray && $wasObject) {
+            $patchedDocument = $emptyObject;
+        } elseif ($patchedDocument === $emptyObject && !$wasObject) {
+            $patchedDocument = $emtpyArray;
+        }
+
         return $patchedDocument;
     }
 }
