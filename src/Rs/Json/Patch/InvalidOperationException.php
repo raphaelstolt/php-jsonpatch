@@ -1,4 +1,8 @@
 <?php
 namespace Rs\Json\Patch;
 
-class InvalidOperationException extends \Exception {}
+use Exception;
+
+class InvalidOperationException extends Exception
+{
+}

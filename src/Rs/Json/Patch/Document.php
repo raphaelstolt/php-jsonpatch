@@ -19,7 +19,7 @@ class Document
 
     /**
      * @param  string $patchDocument
-     * @throws Rs\Json\Patch\InvalidOperationException
+     * @throws \Rs\Json\Patch\InvalidOperationException
      */
     public function __construct($patchDocument)
     {
@@ -36,7 +36,7 @@ class Document
 
     /**
      * @param  string $patchDocument The patch document containing the patch operations.
-     * @throws Rs\Json\Patch\InvalidOperationException
+     * @throws \Rs\Json\Patch\InvalidOperationException
      *
      * @return array
      */
@@ -65,6 +65,8 @@ class Document
 
     /**
      * @param mixed $patchDocument
+     *
+     * @return bool
      */
     private function isEmptyPatchDocument($patchDocument)
     {
@@ -76,9 +78,9 @@ class Document
 
     /**
      * @param  \stdClass $possiblePatchOperation
-     * @throws Rs\Json\Patch\InvalidOperationException
+     * @throws \Rs\Json\Patch\InvalidOperationException
      *
-     * @return Rs\Json\Patch\Operation or null on unsupported patch operation
+     * @return \Rs\Json\Patch\Operation or null on unsupported patch operation
      */
     private function patchOperationFactory(\stdClass $possiblePatchOperation)
     {

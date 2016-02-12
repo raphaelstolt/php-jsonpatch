@@ -1,4 +1,8 @@
 <?php
 namespace Rs\Json\Patch;
 
-class FailedTestException extends \Exception {}
+use Exception;
+
+class FailedTestException extends Exception
+{
+}

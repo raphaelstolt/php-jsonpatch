@@ -17,15 +17,15 @@ class Patch
     private $targetDocument;
 
     /**
-     * @var Rs\Json\Patch\Document
+     * @var \Rs\Json\Patch\Document
      */
-    private $patchDocument;
+    private $jsonPatchDocument;
 
     /**
      * @param  string $targetDocument
      * @param  string $patchDocument
-     * @throws Rs\Json\Patch\InvalidTargetDocumentJsonException
-     * @throws Rs\Json\Patch\InvalidPatchDocumentJsonException
+     * @throws \Rs\Json\Patch\InvalidTargetDocumentJsonException
+     * @throws \Rs\Json\Patch\InvalidPatchDocumentJsonException
      */
     public function __construct($targetDocument, $patchDocument)
     {
@@ -44,7 +44,7 @@ class Patch
     }
 
     /**
-     * @throws Rs\Json\Patch\FailedTestException
+     * @throws \Rs\Json\Patch\FailedTestException
      *
      * @return string
      */
