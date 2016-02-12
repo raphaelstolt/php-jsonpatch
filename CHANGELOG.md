@@ -1,3 +1,8 @@
+### v1.2.4
+  * Cleaned docblocks
+  * Removed unused variables, imports
+  * Keep the type of the JSON the same before and after patching
+
 ### v1.2.3
   * Fixed issue [#10](https://github.com/raphaelstolt/php-jsonpatch/issues/10)
 
