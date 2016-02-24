@@ -62,7 +62,10 @@ class SpecTest extends PHPUnit_Framework_TestCase
 
         // Assert
         $this->assertNotNull($exception, 'An exception should have been thrown');
-        $this->assertContains(get_class($exception), [InvalidOperationException::class, FailedTestException::class]);
+        $this->assertContains(
+            get_class($exception),
+            array(InvalidOperationException::class, FailedTestException::class)
+        );
     }
 
     /**
@@ -72,11 +75,11 @@ class SpecTest extends PHPUnit_Framework_TestCase
      */
     public function mapper($test)
     {
-        return [
+        return array(
             json_encode($test->doc),
             json_encode($test->patch),
             isset($test->error) ? $test->error : (isset($test->expected) ? json_encode($test->expected) : null),
-        ];
+        );
     }
 
     /**
@@ -84,7 +87,7 @@ class SpecTest extends PHPUnit_Framework_TestCase
      */
     public function nonErrorTestsProvider()
     {
-        return array_map([$this, 'mapper'], array_filter($this->allTestsProvider(), function ($test) {
+        return array_map(array($this, 'mapper'), array_filter($this->allTestsProvider(), function ($test) {
             return !isset($test->error);
         }));
     }
@@ -94,7 +97,7 @@ class SpecTest extends PHPUnit_Framework_TestCase
      */
     public function erroringTestsProvider()
     {
-        return array_map([$this, 'mapper'], array_filter($this->allTestsProvider(), function ($test) {
+        return array_map(array($this, 'mapper'), array_filter($this->allTestsProvider(), function ($test) {
             return isset($test->error);
         }));
     }
