@@ -64,7 +64,7 @@ class SpecTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($exception, 'An exception should have been thrown');
         $this->assertContains(
             get_class($exception),
-            array(InvalidOperationException::class, FailedTestException::class)
+            array('Rs\Json\Patch\InvalidOperationException', 'Rs\Json\Patch\FailedTestException')
         );
     }
 
