@@ -1,3 +1,6 @@
+### v1.2.5
+  * Ensure library works by utilising mbstring polyfill
+
 ### v1.2.4
   * Cleaned docblocks
   * Removed unused variables, imports
