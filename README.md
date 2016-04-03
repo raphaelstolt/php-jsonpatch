@@ -4,13 +4,13 @@
 
 This is an implementation of [JSON Patch](http://tools.ietf.org/html/rfc6902) written in PHP.
 
-## Installation via Composer
+### Installation via Composer
 
 ``` bash
 $ composer require php-jsonpatch/php-jsonpatch
 ```
 
-## Usage
+### Usage
 
 Now you can use JSON Patch for PHP via the available Composer **autoload file**.
 
@@ -58,11 +58,15 @@ try {
 For some more usage examples of JSON Patch operations have a look at the
 integration tests located under `tests/integration/*`.
 
-## Testing
+### Changelog
+Please see [CHANGELOG](CHANGELOG.md) for more information.
+
+### Running tests
 
 ``` bash
 $ composer test
 ```
-## License
 
-This library is licensed under the MIT License. Please see [License file](LICENSE.md) for more information.
+### License
+
+This library is licensed under the MIT License. Please see [LICENSE](LICENSE.md) for more information.
