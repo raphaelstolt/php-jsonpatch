@@ -72,8 +72,8 @@ class Test extends Operation
     {
         if (is_string($string) && strlen($string)) {
             // Decode and check last error
-            json_decode($string);
-            return json_last_error() === JSON_ERROR_NONE;
+            $result = json_decode($string);
+            return (json_last_error() === JSON_ERROR_NONE) && ($result != $string);
         }
 
         return false;

@@ -310,6 +310,10 @@ class TestTest extends \PHPUnit_Framework_TestCase
             array(array(
                 'given-json' => '{"foo":{"coo":{"koo":"roo","moo":"zoo"}}}',
                 'test-operation' => (object) array('path' => '/foo/coo', 'value' => array("koo" => "roo", "moo" => "zoo")),
+            )),
+            array(array(
+                'given-json' => '{"foo":"123"}',
+                'test-operation' => (object) array('path' => '/foo', 'value' => "123"),
             ))
         );
     }
