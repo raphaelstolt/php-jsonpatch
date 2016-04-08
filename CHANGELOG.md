@@ -1,3 +1,6 @@
+### v1.3.0
+  * Introduction of a base exception class
+
 ### v1.2.6
   * Keep type of integerish strings in `test` operation
 
