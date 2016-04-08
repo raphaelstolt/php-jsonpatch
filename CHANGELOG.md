@@ -1,3 +1,6 @@
+### v1.2.6
+  * Keep type of integerish strings in `test` operation
+
 ### v1.2.5
   * Ensure library works by utilising mbstring polyfill
 
