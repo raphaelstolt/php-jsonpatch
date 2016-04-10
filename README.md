@@ -58,9 +58,6 @@ try {
 For some more usage examples of JSON Patch operations have a look at the
 integration tests located under `tests/integration/*`.
 
-### Changelog
-Please see [CHANGELOG](CHANGELOG.md) for more information.
-
 ### Running tests
 
 ``` bash
@@ -70,3 +67,6 @@ $ composer test
 ### License
 
 This library is licensed under the MIT License. Please see [LICENSE](LICENSE.md) for more information.
+
+### Changelog
+Please see [CHANGELOG](CHANGELOG.md) for more information.
