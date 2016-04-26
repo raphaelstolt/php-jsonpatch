@@ -83,6 +83,72 @@ class PatchAddTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * @test
+     */
+    public function shouldRespectDeepPointers()
+    {
+        $targetDocument = '{
+          "authority": {
+            "pd": [],
+            "od": [],
+            "md": [],
+            "custom": [
+              {
+                "text": "I should be able to edit this, right?",
+                "type": "with_approval"
+              },
+              {
+                "text": "Test this please.",
+                "type": "complete_authority"
+              },
+              {
+                "text": "dfsasdasdf",
+                "type": "with_approval"
+              }
+            ]
+          }
+        }';
+
+        $patchDocument = '[
+            {"op": "add", "path":"/authority/custom/3", "value": {"text": "some-test-text","type": "with_approval_test"}}
+        ]';
+
+        $expectedDocument = '{
+          "authority": {
+            "pd": [],
+            "od": [],
+            "md": [],
+            "custom": [
+              {
+                "text": "I should be able to edit this, right?",
+                "type": "with_approval"
+              },
+              {
+                "text": "Test this please.",
+                "type": "complete_authority"
+              },
+              {
+                "text": "dfsasdasdf",
+                "type": "with_approval"
+              },
+              {
+                "text": "some-test-text",
+                "type": "with_approval_test"
+              }
+            ]
+          }
+        }';
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
+
+    /**
+     * @test
      * @ticket 10 (https://github.com/raphaelstolt/php-jsonpatch/issues/10)
      */
     public function shouldAddNotReplace()
