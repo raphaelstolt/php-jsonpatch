@@ -62,7 +62,7 @@ class Add extends Operation
 
         if (count($pointerParts) >= 2) {
             try {
-               $rootGet = $pointer->get(Pointer::POINTER_CHAR . $rootPointer);
+               $rootGet = $pointer->get(Pointer::POINTER_CHAR . implode('/', array_slice($pointerParts, 0, -1)));
             } catch (NonexistentValueReferencedException $e) {
                return $targetDocument;
             }
