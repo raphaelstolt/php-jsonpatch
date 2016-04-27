@@ -1,3 +1,6 @@
+### v1.3.1
+  * Fixed issue with deep JSON pointers, see pull request [#20](https://github.com/raphaelstolt/php-jsonpatch/pull/20)
+
 ### v1.3.0
   * Introduction of a base exception class
 
