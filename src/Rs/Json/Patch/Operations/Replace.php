@@ -52,7 +52,7 @@ class Replace extends Operation
             $this->getValue()
         );
 
-        return json_encode($targetDocument);
+        return json_encode($targetDocument, JSON_UNESCAPED_UNICODE);
     }
 
     /**

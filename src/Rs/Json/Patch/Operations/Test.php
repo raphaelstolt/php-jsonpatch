@@ -55,7 +55,8 @@ class Test extends Operation
             asort($get);
             asort($value);
 
-            return json_encode($get) === json_encode($value);
+            return json_encode($get, JSON_UNESCAPED_UNICODE)
+                === json_encode($value, JSON_UNESCAPED_UNICODE);
         }
 
         return $get === $this->getValue();

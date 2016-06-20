@@ -1,3 +1,6 @@
+### v2.0.0
+  * Dropped PHP 5.3 support to avoid escaped unicode [#21](https://github.com/raphaelstolt/php-jsonpatch/issues/21)
+
 ### v1.3.1
   * Fixed issue with deep JSON pointers, see pull request [#20](https://github.com/raphaelstolt/php-jsonpatch/pull/20)
 

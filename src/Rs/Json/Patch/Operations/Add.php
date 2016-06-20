@@ -80,7 +80,7 @@ class Add extends Operation
                         array_splice($targetDocument, $lastPointerPart, 0, $replacementValue);
                     }
                 }
-                return json_encode($targetDocument);
+                return json_encode($targetDocument, JSON_UNESCAPED_UNICODE);
             }
             if (count($pointerParts) === 1) {
                 $targetDocument[$pointerParts[0]] = $this->getValue();
@@ -128,6 +128,6 @@ class Add extends Operation
             }
         }
 
-        return json_encode($targetDocument);
+        return json_encode($targetDocument, JSON_UNESCAPED_UNICODE);
     }
 }

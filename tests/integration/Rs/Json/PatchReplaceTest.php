@@ -63,4 +63,26 @@ class PatchReplaceTest extends \PHPUnit_Framework_TestCase
             $patchedDocument
         );
     }
+    /**
+     * @test
+     * @ticket 21 (https://github.com/raphaelstolt/php-jsonpatch/issues/21)
+     */
+    public function shouldKeepEncoding()
+    {
+        $targetDocument = '{"bookid": "1","bookname": "第二个"}';
+        $patchDocument = '[
+          {"op":"replace", "path":"/bookid", "value":"0"},
+          {"op":"replace", "path":"/bookname", "value":"第一个"}
+        ]';
+
+        $expectedDocument = '{"bookid": "0", "bookname":"第一个"}';
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
 }
