@@ -70,10 +70,7 @@ class Document
      */
     private function isEmptyPatchDocument($patchDocument)
     {
-        if (empty($patchDocument) || !is_array($patchDocument) || count($patchDocument) === 0) {
-            return true;
-        }
-        return false;
+        return (empty($patchDocument) || !is_array($patchDocument) || count($patchDocument) === 0);
     }
 
     /**
