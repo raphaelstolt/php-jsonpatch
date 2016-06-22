@@ -13,7 +13,7 @@ use Rs\Json\Patch\Operations\Test;
 class Document
 {
     /**
-     * @var array
+     * @var Operation[]
      */
     private $patchOperations;
 
@@ -27,7 +27,7 @@ class Document
     }
 
     /**
-     * @return array
+     * @return Operation[]
      */
     public function getPatchOperations()
     {
@@ -38,7 +38,7 @@ class Document
      * @param  string $patchDocument The patch document containing the patch operations.
      * @throws \Rs\Json\Patch\InvalidOperationException
      *
-     * @return array
+     * @return Operation[]
      */
     private function extractPatchOperations($patchDocument)
     {
