@@ -37,7 +37,9 @@ class Add extends Operation
      */
     private function getReplacementValue()
     {
-        return is_array($this->getValue()) || is_object($this->getValue()) ? array($this->getValue()) : $this->getValue();
+        $value = $this->getValue();
+
+        return (is_array($value) || is_object($value)) ? array($value) : $value;
     }
 
     /**
@@ -49,6 +51,7 @@ class Add extends Operation
     {
         $pointer = new Pointer($targetDocument);
         $rootGet = array();
+        $value = $this->getValue();
 
         try {
             $get = $pointer->get($this->getPath());
@@ -83,13 +86,13 @@ class Add extends Operation
                 return json_encode($targetDocument, JSON_UNESCAPED_UNICODE);
             }
             if (count($pointerParts) === 1) {
-                $targetDocument[$pointerParts[0]] = $this->getValue();
+                $targetDocument[$pointerParts[0]] = $value;
             } elseif (count($pointerParts) > 1) {
                 $augmentedDocument = &$targetDocument;
                 foreach ($pointerParts as $pointerPart) {
                     $augmentedDocument = &$augmentedDocument[$pointerPart];
                 }
-                $augmentedDocument = $this->getValue();
+                $augmentedDocument = $value;
             }
         } else {
 
@@ -104,12 +107,12 @@ class Add extends Operation
 
             if (is_array($targetArray)) {
                 if ($lastPointerPart === Pointer::LAST_ARRAY_ELEMENT_CHAR) {
-                    $targetArray[] = $this->getValue();
+                    $targetArray[] = $value;
                 } else {
                     if (is_numeric($additionIndex)) {
                         array_splice($targetArray, $additionIndex, 0, $replacementValue);
                     } else {
-                        $targetArray[$additionIndex] = $this->getValue();
+                        $targetArray[$additionIndex] = $value;
                     }
                 }
                 $augmentedDocument = &$targetDocument;
@@ -123,7 +126,7 @@ class Add extends Operation
                 if (count($targetDocument) > 0 && is_numeric($additionIndex)) {
                     array_splice($targetDocument, $additionIndex, 0, $replacementValue);
                 } else {
-                    $targetDocument[$additionIndex] = $this->getValue();
+                    $targetDocument[$additionIndex] = $value;
                 }
             }
         }
