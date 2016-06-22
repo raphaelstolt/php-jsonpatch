@@ -52,11 +52,7 @@ class Test extends Operation
         $value = is_object($this->getValue()) ? (array) $this->getValue() : $this->getValue();
 
         if (is_array($value) && is_array($get)) {
-            asort($get);
-            asort($value);
-
-            return json_encode($get, JSON_UNESCAPED_UNICODE)
-                === json_encode($value, JSON_UNESCAPED_UNICODE);
+            $this->arraysAreIdentical($value, $get);
         }
 
         return $get === $this->getValue();
@@ -78,5 +74,19 @@ class Test extends Operation
         }
 
         return false;
+    }
+
+    /**
+     * @param array $value
+     * @param array $get
+     *
+     * @return bool
+     */
+    private function arraysAreIdentical(array $value, array $get)
+    {
+        asort($get);
+        asort($value);
+
+        return json_encode($get, JSON_UNESCAPED_UNICODE) === json_encode($value, JSON_UNESCAPED_UNICODE);
     }
 }
