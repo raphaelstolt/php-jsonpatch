@@ -52,7 +52,7 @@ class Test extends Operation
         $value = is_object($this->getValue()) ? (array) $this->getValue() : $this->getValue();
 
         if (is_array($value) && is_array($get)) {
-            $this->arraysAreIdentical($value, $get);
+            return $this->arraysAreIdentical($value, $get);
         }
 
         return $get === $this->getValue();
