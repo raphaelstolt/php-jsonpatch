@@ -60,7 +60,9 @@ class Patch
             if ($patchOperation instanceof Test && $targetDocument === false) {
                 $exceptionMessage = 'Failed on Test PatchOperation at index: ' . $index;
                 throw new FailedTestException($exceptionMessage);
-            } elseif (!$patchOperation instanceof Test) {
+            }
+
+            if (!$patchOperation instanceof Test) {
                 $patchedDocument = $targetDocument;
             }
         }
@@ -69,7 +71,9 @@ class Patch
         $emptyObject = '{}';
         if ($patchedDocument === $emtpyArray && $wasObject) {
             $patchedDocument = $emptyObject;
-        } elseif ($patchedDocument === $emptyObject && !$wasObject) {
+        }
+
+        if ($patchedDocument === $emptyObject && !$wasObject) {
             $patchedDocument = $emtpyArray;
         }
 
