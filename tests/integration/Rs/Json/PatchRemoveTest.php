@@ -67,7 +67,7 @@ class PatchRemoveTest extends \PHPUnit_Framework_TestCase
         $this->assertJsonStringEqualsJsonString(
             $expectedDocument,
             $patchedDocument
-        );   
+        );
     }
     /**
      * @test

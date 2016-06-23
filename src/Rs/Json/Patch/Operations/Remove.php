@@ -21,7 +21,9 @@ class Remove extends Operation
      *
      * @param \stdClass $operation The operation structure.
      */
-    protected function assertMandatories(\stdClass $operation) {}
+    protected function assertMandatories(\stdClass $operation)
+    {
+    }
 
     /**
      * @param  string $targetDocument

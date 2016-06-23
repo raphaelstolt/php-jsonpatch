@@ -22,7 +22,7 @@ class CopyTest extends \PHPUnit_Framework_TestCase
      * @test
      */
     public function targetDocumentIsReturnedUnmodifiedOnNonexistentFromPointer()
-    {   
+    {
         $targetJson = $expectedJson = '{"a":{"b":{"c":17}}}';
         $operation = new \stdClass;
         $operation->from = '/a/b/d';

@@ -48,7 +48,7 @@ abstract class Operation
      */
     public function getValue()
     {
-       return $this->value;
+        return $this->value;
     }
 
     /**

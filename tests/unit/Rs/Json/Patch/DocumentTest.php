@@ -299,4 +299,4 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             array(json_encode(array(array('mop' => 'test', 'path' => '/a/b/c')))),
         );
     }
- }
+}

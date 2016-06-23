@@ -65,9 +65,9 @@ class Add extends Operation
 
         if (count($pointerParts) >= 2) {
             try {
-               $rootGet = $pointer->get(Pointer::POINTER_CHAR . implode('/', array_slice($pointerParts, 0, -1)));
+                $rootGet = $pointer->get(Pointer::POINTER_CHAR . implode('/', array_slice($pointerParts, 0, -1)));
             } catch (NonexistentValueReferencedException $e) {
-               return $targetDocument;
+                return $targetDocument;
             }
         }
 
@@ -95,7 +95,6 @@ class Add extends Operation
                 $augmentedDocument = $value;
             }
         } else {
-
             $additionIndex = array_pop($pointerParts);
             $arrayEntryPath = '/' . implode('/', $pointerParts);
 
