@@ -9,6 +9,13 @@ use Rs\Json\Pointer\NonexistentValueReferencedException;
 class Copy extends Operation
 {
     /**
+     * Used for bitmap operations to find out if allowed or not
+     *
+     * @const int
+     */
+    const APPLY = 2;
+
+    /**
      * @var string
      */
     protected $from;

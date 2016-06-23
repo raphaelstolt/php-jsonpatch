@@ -9,6 +9,13 @@ use Rs\Json\Pointer\NonexistentValueReferencedException;
 class Replace extends Operation
 {
     /**
+     * Used for bitmap operations to find out if allowed or not
+     *
+     * @const int
+     */
+    const APPLY = 16;
+    
+    /**
      * @param \stdClass $operation
      */
     public function __construct(\stdClass $operation)

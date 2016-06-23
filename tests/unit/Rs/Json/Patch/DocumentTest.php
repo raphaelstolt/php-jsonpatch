@@ -2,6 +2,12 @@
 namespace Rs\Json\Patch;
 
 use Rs\Json\Patch\Document;
+use Rs\Json\Patch\Operations\Add;
+use Rs\Json\Patch\Operations\Copy;
+use Rs\Json\Patch\Operations\Move;
+use Rs\Json\Patch\Operations\Remove;
+use Rs\Json\Patch\Operations\Replace;
+use Rs\Json\Patch\Operations\Test;
 
 class DocumentTest extends \PHPUnit_Framework_TestCase
 {
@@ -154,6 +160,41 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             );
         }
     }
+
+    /**
+     * @test
+     */
+    public function shouldReturnAnArrayOfPatchOperationsOnPatchDocumentNotContainingTestAndMove()
+    {
+        $patchDocument = json_encode(array(
+            array('op' => 'test', 'path' => '/a/b/c', 'value' => 'foo'),
+            array('op' => 'remove', 'path' => '/a/b/c'),
+            array('value' => array('foo', 'bar'), 'path' => '/a/b/c', 'op' => 'add'),
+            array('op' => 'replace', 'path' => '/a/b/c', 'value' => 42),
+            array('op' => 'move', 'from' => '/a/b/d', 'path' => '/a/b/c'),
+            array('op' => 'copy', 'path' => '/a/b/d', 'from' => '/a/b/e'),
+        ));
+
+        $document = new Document($patchDocument, Add::APPLY | Copy::APPLY | Replace::APPLY | Remove::APPLY);
+        $patchOperations = $document->getPatchOperations();
+
+        $this->assertCount(4, $patchOperations);
+
+        $operationNames = array(
+            'remove',
+            'add',
+            'replace',
+            'copy',
+        );
+
+        foreach ($operationNames as $index => $operationName) {
+            $this->assertInstanceOf(
+                'Rs\Json\Patch\Operations\\' . ucfirst($operationName),
+                $patchOperations[$index]
+            );
+        }
+    }
+
     /**
      * @test
      * @expectedException Rs\Json\Patch\InvalidOperationException
