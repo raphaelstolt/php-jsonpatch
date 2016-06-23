@@ -29,7 +29,8 @@
         }
     },
     "scripts": {
-        "test": "phpunit"
+        "test": "phpunit",
+        "cs-fix": "php-cs-fixer fix . -vv || true"
     },
     "extra": {
         "branch-alias": {
