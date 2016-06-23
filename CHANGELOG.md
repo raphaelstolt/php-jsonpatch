@@ -1,3 +1,6 @@
+### v2.1.0
+  * Additional ability to disable some patch operations contributed by [@mikelohmann](https://github.com/mikelohmann)
+
 ### v2.0.1
   * Several refactorings and improvements contributed by [@greydnls](https://github.com/greydnls)
 
