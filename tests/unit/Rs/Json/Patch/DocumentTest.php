@@ -197,6 +197,42 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     */
+    public function perDefaultAllPatchOperationsAreAllowed()
+    {
+        $patchDocument = json_encode(array(
+            array('op' => 'test', 'path' => '/a/b/c', 'value' => 'foo'),
+            array('op' => 'remove', 'path' => '/a/b/c'),
+            array('value' => array('foo', 'bar'), 'path' => '/a/b/c', 'op' => 'add'),
+            array('op' => 'replace', 'path' => '/a/b/c', 'value' => 42),
+            array('op' => 'move', 'from' => '/a/b/d', 'path' => '/a/b/c'),
+            array('op' => 'copy', 'path' => '/a/b/d', 'from' => '/a/b/e'),
+        ));
+
+        $document = new Document($patchDocument);
+        $patchOperations = $document->getPatchOperations();
+
+        $this->assertCount(6, $patchOperations);
+
+        $operationNames = array(
+            'test',
+            'remove',
+            'add',
+            'replace',
+            'move',
+            'copy',
+        );
+
+        foreach ($operationNames as $index => $operationName) {
+            $this->assertInstanceOf(
+                'Rs\Json\Patch\Operations\\' . ucfirst($operationName),
+                $patchOperations[$index]
+            );
+        }
+    }
+
+    /**
+     * @test
      * @expectedException Rs\Json\Patch\InvalidOperationException
      * @dataProvider invalidPatchDocumentProvider
      */
