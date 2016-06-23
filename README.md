@@ -70,3 +70,6 @@ This library is licensed under the MIT License. Please see [LICENSE](LICENSE.md)
 
 ### Changelog
 Please see [CHANGELOG](CHANGELOG.md) for more information.
+
+### Contributing
+Please see [CONTRIBUTING](CONTRIBUTING.md) for more information.
