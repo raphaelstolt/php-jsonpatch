@@ -24,10 +24,11 @@ class Patch
     /**
      * @param  string $targetDocument
      * @param  string $patchDocument
+     * @param  int $allowedPatchOperations
      * @throws \Rs\Json\Patch\InvalidTargetDocumentJsonException
      * @throws \Rs\Json\Patch\InvalidPatchDocumentJsonException
      */
-    public function __construct($targetDocument, $patchDocument)
+    public function __construct($targetDocument, $patchDocument, $allowedPatchOperations = null)
     {
         json_decode($targetDocument, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -40,7 +41,7 @@ class Patch
         }
 
         $this->targetDocument = $targetDocument;
-        $this->jsonPatchDocument = new Document($patchDocument);
+        $this->jsonPatchDocument = new Document($patchDocument, $allowedPatchOperations);
     }
 
     /**

@@ -9,6 +9,13 @@ use Rs\Json\Pointer\NonexistentValueReferencedException;
 class Add extends Operation
 {
     /**
+     * Used for bitmap operations to find out if allowed or not
+     * 
+     * @const int
+     */
+    const APPLY = 1;
+
+    /**
      * @param \stdClass $operation
      */
     public function __construct(\stdClass $operation)

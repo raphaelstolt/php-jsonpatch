@@ -9,6 +9,13 @@ use Rs\Json\Pointer\NonexistentValueReferencedException;
 class Move extends Operation
 {
     /**
+     * Used for bitmap operations to find out if allowed or not
+     *
+     * @const int
+     */
+    const APPLY = 4;
+    
+    /**
      * @var string
      */
     protected $from;

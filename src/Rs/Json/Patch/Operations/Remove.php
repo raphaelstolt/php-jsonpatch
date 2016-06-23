@@ -8,6 +8,13 @@ use Rs\Json\Pointer\NonexistentValueReferencedException;
 class Remove extends Operation
 {
     /**
+     * Used for bitmap operations to find out if allowed or not
+     *
+     * @const int
+     */
+    const APPLY = 8;
+
+    /**
      * @param \stdClass $operation
      */
     public function __construct(\stdClass $operation)
