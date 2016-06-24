@@ -24,7 +24,7 @@ class Document
 
     /**
      * @param  string $patchDocument
-     * @param  int $patchDocument
+     * @param  int $allowedPatchOperations
      * @throws \Rs\Json\Patch\InvalidOperationException
      */
     public function __construct($patchDocument, $allowedPatchOperations = null)
