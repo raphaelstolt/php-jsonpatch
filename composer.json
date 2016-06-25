@@ -18,11 +18,11 @@
     "require": {
         "php": ">=5.4",
         "symfony/polyfill-mbstring": "^1.1",
-        "php-jsonpointer/php-jsonpointer": "^2.0",
-        "friendsofphp/php-cs-fixer": "^1.11"
+        "php-jsonpointer/php-jsonpointer": "^2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.6.*"
+        "phpunit/phpunit": "4.6.*",
+        "friendsofphp/php-cs-fixer": "^1.11"
     },
     "autoload": {
         "psr-0": {
