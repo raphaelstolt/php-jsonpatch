@@ -1,3 +1,6 @@
+### v2.1.1
+  * Moved the PHP coding standards fixer to dev requirements.
+
 ### v2.1.0
   * Additional ability to disable some patch operations contributed by [@mikelohmann](https://github.com/mikelohmann)
 
