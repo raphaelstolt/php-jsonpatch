@@ -51,7 +51,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
         $operation->value = $value;
 
         $addOperation = new Add($operation);
-        
+
         $this->assertJsonStringEqualsJsonString(
             $expectedJson,
             $addOperation->perform($targetJson)
@@ -95,6 +95,28 @@ class AddTest extends \PHPUnit_Framework_TestCase
             $addOperation->perform($targetJson)
         );
     }
+
+    /**
+     * @test
+     * @ticket 28 (https://github.com/raphaelstolt/php-jsonpatch/issues/28)
+     */
+    public function shouldKeepObjectsAsObjects()
+    {
+        $targetJson = '{"foo": {"bar": "baz", "boo": {}}}';
+        $expectedJson = '{"foo": {"bar": "baz", "boo": {}, "baz": "qux"}}';
+
+        $operation = new \stdClass;
+        $operation->path = '/foo/baz';
+        $operation->value = 'qux';
+
+        $addOperation = new Add($operation);
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedJson,
+            $addOperation->perform($targetJson)
+        );
+    }
+
     /**
      * @test
      */
