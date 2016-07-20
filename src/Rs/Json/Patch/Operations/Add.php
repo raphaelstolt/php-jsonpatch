@@ -10,7 +10,7 @@ class Add extends Operation
 {
     /**
      * Used for bitmap operations to find out if allowed or not
-     * 
+     *
      * @const int
      */
     const APPLY = 1;
@@ -78,7 +78,7 @@ class Add extends Operation
             }
         }
 
-        $targetDocument = json_decode($targetDocument, true);
+        $targetDocument = json_decode($targetDocument);
 
         $lastPointerPart = $pointerParts[count($pointerParts) - 1];
         $replacementValue = $this->getReplacementValue();
@@ -93,11 +93,19 @@ class Add extends Operation
                 return json_encode($targetDocument, JSON_UNESCAPED_UNICODE);
             }
             if (count($pointerParts) === 1) {
-                $targetDocument[$pointerParts[0]] = $value;
+                if (is_array($targetDocument)) {
+                    $targetDocument[$pointerParts[0]] = $value;
+                } else {
+                    $targetDocument->{$pointerParts[0]} = $value;
+                }
             } elseif (count($pointerParts) > 1) {
                 $augmentedDocument = &$targetDocument;
                 foreach ($pointerParts as $pointerPart) {
-                    $augmentedDocument = &$augmentedDocument[$pointerPart];
+                    if (is_array($augmentedDocument)) {
+                        $augmentedDocument = &$augmentedDocument[$pointerPart];
+                    } else {
+                        $augmentedDocument = &$augmentedDocument->{$pointerPart};
+                    }
                 }
                 $augmentedDocument = $value;
             }
@@ -123,7 +131,11 @@ class Add extends Operation
                 }
                 $augmentedDocument = &$targetDocument;
                 foreach ($pointerParts as $pointerPart) {
-                    $augmentedDocument = &$augmentedDocument[$pointerPart];
+                    if (is_array($augmentedDocument)) {
+                        $augmentedDocument = &$augmentedDocument[$pointerPart];
+                    } else {
+                        $augmentedDocument = &$augmentedDocument->{$pointerPart};
+                    }
                 }
                 $augmentedDocument = $targetArray;
             }
@@ -132,7 +144,7 @@ class Add extends Operation
                 if (count($targetDocument) > 0 && is_numeric($additionIndex)) {
                     array_splice($targetDocument, $additionIndex, 0, $replacementValue);
                 } else {
-                    $targetDocument[$additionIndex] = $value;
+                    $targetDocument->{$additionIndex} = $value;
                 }
             }
         }
