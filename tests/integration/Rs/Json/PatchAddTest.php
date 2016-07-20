@@ -22,6 +22,24 @@ class PatchAddTest extends \PHPUnit_Framework_TestCase
             $patchedDocument
         );
     }
+
+    /**
+     * @test
+     */
+    public function shouldAddEmptyObject()
+    {
+        $targetDocument = '{"foo":{"obj": {"property": "value", "emptyObj": {}}}}';
+        $patchDocument = '[{"op":"add", "path":"/foo/obj/anotherProp", "value":"qux"}]';
+        $expectedDocument = '{"foo":{"obj": {"property": "value", "anotherProp": "qux", "emptyObj": {}}}}';
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
     /**
      * @test
      */
