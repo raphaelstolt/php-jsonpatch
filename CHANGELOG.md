@@ -1,3 +1,6 @@
+### v2.1.2
+  * Fixed issue [#28](https://github.com/raphaelstolt/php-jsonpatch/issues/28) contributed by [@narcoticfresh](https://github.com/narcoticfresh)
+
 ### v2.1.1
   * Moved the PHP coding standards fixer to dev requirements.
 
