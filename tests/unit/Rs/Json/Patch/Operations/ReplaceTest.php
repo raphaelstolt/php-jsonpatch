@@ -41,7 +41,7 @@ class ReplaceTest extends \PHPUnit_Framework_TestCase
     public function shouldNotReplaceOnNonexistentPath()
     {
         $targetJson = $expectedJson = '{"baz":"qux","foo":"bar"}';
-        
+
         $operation = new \stdClass;
         $operation->path = '/buz';
         $operation->value = 'boo';
@@ -51,6 +51,27 @@ class ReplaceTest extends \PHPUnit_Framework_TestCase
         $this->assertJsonStringEqualsJsonString(
             $expectedJson,
             $addOperation->perform($targetJson)
+        );
+    }
+
+    /**
+     * @test
+     * @ticket 30 (https://github.com/raphaelstolt/php-jsonpatch/issues/30)
+     */
+    public function shouldKeepObjectsAsObjects()
+    {
+        $targetJson = '{"foo": {"bar": "baz", "boo": {}}}';
+        $expectedJson = '{"foo": {"bar": "bing", "boo": {}}}';
+
+        $operation = new \stdClass;
+        $operation->path = '/foo/bar';
+        $operation->value = 'bing';
+
+        $replaceOperation = new Replace($operation);
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedJson,
+            $replaceOperation->perform($targetJson)
         );
     }
 

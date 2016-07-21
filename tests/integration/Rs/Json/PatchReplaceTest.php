@@ -85,4 +85,23 @@ class PatchReplaceTest extends \PHPUnit_Framework_TestCase
             $patchedDocument
         );
     }
+
+    /**
+     * @test
+     * @ticket 30 (https://github.com/raphaelstolt/php-jsonpatch/issues/30)
+     */
+    public function shouldPreserveObjects()
+    {
+        $targetDocument = '{"foo":{"obj": {"property": "value", "emptyObj": {}}}}';
+        $patchDocument = '[{"op":"replace", "path":"/foo/obj/property", "value":"qux"}]';
+        $expectedDocument = '{"foo":{"obj": {"property": "qux", "emptyObj": {}}}}';
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
 }
