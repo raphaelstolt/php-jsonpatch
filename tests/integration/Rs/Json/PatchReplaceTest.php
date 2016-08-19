@@ -104,4 +104,23 @@ class PatchReplaceTest extends \PHPUnit_Framework_TestCase
             $patchedDocument
         );
     }
+
+    /**
+     * @test
+     * @ticket 33 (https://github.com/raphaelstolt/php-jsonpatch/issues/33)
+     */
+    public function shouldPreserveObjectsSameLevel()
+    {
+        $targetDocument = '{"foo": {"bar": {"baz": {"boo": {}, "qux": "value"}}}}';
+        $patchDocument = '[{"op":"replace", "path":"/foo/bar/baz/qux", "value":"otherValue"}]';
+        $expectedDocument = '{"foo": {"bar": {"baz": {"boo": {}, "qux": "otherValue"}}}}';
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
 }

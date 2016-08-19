@@ -77,6 +77,27 @@ class ReplaceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @ticket 33 (https://github.com/raphaelstolt/php-jsonpatch/issues/33)
+     */
+    public function shouldPreserveEmptyObjectSameLevel()
+    {
+        $targetJson = '{"foo": {"bar": {"baz": {"boo": {}, "qux": "value"}}}}';
+        $expectedJson = '{"foo": {"bar": {"baz": {"boo": {}, "qux": "otherValue"}}}}';
+
+        $operation = new \stdClass;
+        $operation->path = '/foo/bar/baz/qux';
+        $operation->value = 'otherValue';
+
+        $replaceOperation = new Replace($operation);
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedJson,
+            $replaceOperation->perform($targetJson)
+        );
+    }
+
+    /**
+     * @test
      * @ticket 5 (https://github.com/raphaelstolt/php-jsonpatch/issues/5)
      */
     public function shouldReplaceWhenPathValueIsNull()

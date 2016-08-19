@@ -50,19 +50,35 @@ class Test extends Operation
             $get = $pointer->get($this->getPath());
             // Pointer::get() method can return mixed result, we should force type to array for json string
             if ($this->isValidJsonString($get)) {
-                $get = json_decode($get, true);
+                $get = json_decode($get);
             }
         } catch (NonexistentValueReferencedException $e) {
             $get = null;
         }
 
-        $value = is_object($this->getValue()) ? (array) $this->getValue() : $this->getValue();
+        $value = $this->getValue();
+
+        /**
+         * to remain backwards compatible, we support testing a $value of array with non-numeric indexes
+         * to a $get of object.. in that case, we cast $value to object
+         */
+        if (is_array($value) && !empty($value)) {
+            // in if to remain php 5.4 compatible
+            $keys = array_keys($value);
+            if (!ctype_digit((string) $keys[0])) {
+                $value = (object) $value;
+            }
+        }
 
         if (is_array($value) && is_array($get)) {
             return $this->arraysAreIdentical($value, $get);
         }
 
-        return $get === $this->getValue();
+        if (is_object($value) && is_object($get)) {
+            return ($get == $value);
+        }
+
+        return ($get === $value);
     }
 
     /**

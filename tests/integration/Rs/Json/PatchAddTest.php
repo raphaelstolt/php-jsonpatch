@@ -43,6 +43,24 @@ class PatchAddTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * @test
+     * @ticket 33 (https://github.com/raphaelstolt/php-jsonpatch/issues/33)
+     */
+    public function shouldPreserveEmptyObjectSameLevel()
+    {
+        $targetDocument = '{"foo": {"bar": {"baz": {"boo": {}, "qux": "value"}}}}';
+        $patchDocument = '[{"op":"add", "path":"/foo/bar/baz/qux", "value":"otherValue"}]';
+        $expectedDocument = '{"foo": {"bar": {"baz": {"boo": {}, "qux": "otherValue"}}}}';
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
+    /**
+     * @test
      */
     public function shouldAddNestedObjectMemberAsExpected1()
     {

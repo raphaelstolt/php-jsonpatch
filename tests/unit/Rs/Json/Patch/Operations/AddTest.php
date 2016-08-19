@@ -119,6 +119,27 @@ class AddTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @ticket 33 (https://github.com/raphaelstolt/php-jsonpatch/issues/33)
+     */
+    public function shouldPreserveEmptyObjectSameLevel()
+    {
+        $targetJson = '{"foo": {"bar": {"baz": {"boo": {}, "qux": "value"}}}}';
+        $expectedJson = '{"foo": {"bar": {"baz": {"boo": {}, "qux": "otherValue"}}}}';
+
+        $operation = new \stdClass;
+        $operation->path = '/foo/bar/baz/qux';
+        $operation->value = 'otherValue';
+
+        $addOperation = new Add($operation);
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedJson,
+            $addOperation->perform($targetJson)
+        );
+    }
+
+    /**
+     * @test
      */
     public function shouldAddAnArrayValueAsExpected()
     {
