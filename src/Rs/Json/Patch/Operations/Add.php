@@ -129,6 +129,13 @@ class Add extends Operation
                         $targetArray[$additionIndex] = $value;
                     }
                 }
+            }
+
+            if (is_object($targetArray)) {
+                $targetArray->{$additionIndex} = $value;
+            }
+
+            if (is_array($targetArray) || is_object($targetArray)) {
                 $augmentedDocument = &$targetDocument;
                 foreach ($pointerParts as $pointerPart) {
                     if (is_array($augmentedDocument)) {
