@@ -1,3 +1,6 @@
+### v3.0.0
+  * Fixed issue [#33](https://github.com/raphaelstolt/php-jsonpatch/issues/33) contributed by [@narcoticfresh](https://github.com/narcoticfresh)
+
 ### v2.1.4
   * Exclude EditorConfig configuration from release
 
