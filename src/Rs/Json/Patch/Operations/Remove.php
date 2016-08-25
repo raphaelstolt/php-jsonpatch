@@ -85,6 +85,9 @@ class Remove extends Operation
             unset($json[count($json) - 1]);
         } else {
             if (is_object($json)) {
+                if (ctype_digit($pointerPart)) {
+                    $pointerPart = (int) $pointerPart;
+                }
                 unset($json->{$pointerPart});
             } else {
                 unset($json[$pointerPart]);
