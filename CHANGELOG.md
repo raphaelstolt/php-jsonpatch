@@ -1,3 +1,6 @@
+### v3.0.1
+  * Fixed issue [#35](https://github.com/raphaelstolt/php-jsonpatch/issues/35) contributed by [@narcoticfresh](https://github.com/narcoticfresh)
+
 ### v3.0.0
   * Fixed issue [#33](https://github.com/raphaelstolt/php-jsonpatch/issues/33) contributed by [@narcoticfresh](https://github.com/narcoticfresh)
 
