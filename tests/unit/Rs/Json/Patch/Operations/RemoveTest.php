@@ -36,6 +36,44 @@ class RemoveTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * @test
+     * @ticket 35 (https://github.com/raphaelstolt/php-jsonpatch/issues/35)
+     */
+    public function shouldPreserveEmptyObject()
+    {
+        $targetJson = '{"foo":{"bar":{"baz": {}, "qux": "val"}}, "bar": {}}';
+        $expectedJson = '{"foo":{"bar":{"baz": {}}}, "bar": {}}';
+
+        $operation = new \stdClass;
+        $operation->path = '/foo/bar/qux';
+
+        $removeOperation = new Remove($operation);
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedJson,
+            $removeOperation->perform($targetJson)
+        );
+    }
+    /**
+     * @test
+     * @ticket 35 (https://github.com/raphaelstolt/php-jsonpatch/issues/35)
+     */
+    public function shouldPreserveEmptyObjectNumericObjectProperties()
+    {
+        $targetJson = '{"foo":{"bar":{"baz": {}, "3": "val"}}, "bar": {}}';
+        $expectedJson = '{"foo":{"bar":{"baz": {}}}, "bar": {}}';
+
+        $operation = new \stdClass;
+        $operation->path = '/foo/bar/3';
+
+        $removeOperation = new Remove($operation);
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedJson,
+            $removeOperation->perform($targetJson)
+        );
+    }
+    /**
+     * @test
      * @dataProvider removeProvider
      */
     public function shouldRemoveAsExpected($providerData)
@@ -75,7 +113,7 @@ class RemoveTest extends \PHPUnit_Framework_TestCase
             )),
             array(array(
                 'given-json' => '{"baz":{"boo":{"bar":"zoo"}}}',
-                'expected-json' => '{"baz":{"boo":[]}}',
+                'expected-json' => '{"baz":{"boo":{}}}',
                 'remove-operation' => (object) array('path' => '/baz/boo/bar'),
             )),
             array(array(

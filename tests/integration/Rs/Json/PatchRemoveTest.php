@@ -14,7 +14,7 @@ class PatchRemoveTest extends \PHPUnit_Framework_TestCase
             array(
                 '{"a":{"b":null}}', // target document
                 '[ {"op":"remove", "path":"/a/b"} ]', // patch document
-                '{"a":[]}' // expected doument
+                '{"a":{}}' // expected document
             ),
             array(
                 '{"a":null}',
@@ -101,6 +101,42 @@ class PatchRemoveTest extends \PHPUnit_Framework_TestCase
     {
         $expectedDocument = $targetDocument = '{"foo":"bar"}';
         $patchDocument = '[ {"op":"remove", "path":"/baz/boo"} ]';
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
+    /**
+     * @test
+     * @ticket 35 (https://github.com/raphaelstolt/php-jsonpatch/issues/35)
+     */
+    public function shouldPreserveEmptyObject()
+    {
+        $targetDocument = '{"foo":{"bar":{"baz": {}, "qux": "val"}}, "bar": {}}';
+        $patchDocument = '[{"op":"remove", "path":"/foo/bar/qux"}]';
+        $expectedDocument = '{"foo":{"bar":{"baz": {}}}, "bar": {}}';
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
+    /**
+     * @test
+     * @ticket 35 (https://github.com/raphaelstolt/php-jsonpatch/issues/35)
+     */
+    public function shouldPreserveEmptyObjectNumericObjectProperties()
+    {
+        $targetDocument = '{"foo":{"bar":{"baz": {}, "3": "val"}}, "bar": {}}';
+        $patchDocument = '[{"op":"remove", "path":"/foo/bar/3"}]';
+        $expectedDocument = '{"foo":{"bar":{"baz": {}}}, "bar": {}}';
 
         $patch = new Patch($targetDocument, $patchDocument);
         $patchedDocument = $patch->apply();

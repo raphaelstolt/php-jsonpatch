@@ -46,21 +46,21 @@ class Remove extends Operation
             return $targetDocument;
         }
 
-        $targetDocument = json_decode($targetDocument, true);
+        $targetDocument = json_decode($targetDocument);
         $this->remove($targetDocument, $this->getPointerParts());
 
         return json_encode($targetDocument, JSON_UNESCAPED_UNICODE);
     }
 
     /**
-     * @param array $json         The json_decode'd Json structure.
-     * @param array $pointerParts The parts of the fed pointer.
+     * @param array|object $json         The json_decode'd Json structure.
+     * @param array        $pointerParts The parts of the fed pointer.
      */
-    private function remove(array &$json, array $pointerParts)
+    private function remove(&$json, array $pointerParts)
     {
         $pointerPart = array_shift($pointerParts);
 
-        if (isset($json[$pointerPart])) {
+        if (is_array($json) && isset($json[$pointerPart])) {
             if (count($pointerParts) === 0) {
                 unset($json[$pointerPart]);
                 if (ctype_digit($pointerPart)) {
@@ -72,10 +72,23 @@ class Remove extends Operation
                     $pointerParts
                 );
             }
+        } elseif (is_object($json) && isset($json->{$pointerPart})) {
+            if (count($pointerParts) === 0) {
+                unset($json->{$pointerPart});
+            } else {
+                $this->remove(
+                    $json->{$pointerPart},
+                    $pointerParts
+                );
+            }
         } elseif ($pointerPart === Pointer::LAST_ARRAY_ELEMENT_CHAR && is_array($json)) {
             unset($json[count($json) - 1]);
         } else {
-            unset($json[$pointerPart]);
+            if (is_object($json)) {
+                unset($json->{$pointerPart});
+            } else {
+                unset($json[$pointerPart]);
+            }
         }
     }
 }
