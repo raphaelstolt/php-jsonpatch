@@ -140,6 +140,49 @@ class AddTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @ticket 37 (https://github.com/raphaelstolt/php-jsonpatch/issues/37)
+     */
+    public function shouldCorrectlyUseNumericIndexInObjectHandling()
+    {
+        $targetJson = '{"foo": {"bar": {"baz": [ {"bar":"baz"}, {"bar":"qux"} ] }}}';
+        $expectedJson = '{"foo": {"bar": {"baz": [ {"bar":"baz"}, {"bar":"otherValue"}, {"bar":"qux"} ] }}}';
+
+        $operation = new \stdClass;
+        $operation->path = '/foo/bar/baz/1';
+        $operation->value = new \stdClass();
+        $operation->value->bar = 'otherValue';
+
+        $addOperation = new Add($operation);
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedJson,
+            $addOperation->perform($targetJson)
+        );
+    }
+
+    /**
+     * @test
+     * @ticket 37 (https://github.com/raphaelstolt/php-jsonpatch/issues/37)
+     */
+    public function shouldCorrectlyUseNumericIndexInObjectHandlingWithAddedSubProp()
+    {
+        $targetJson = '{"foo": {"bar": {"baz": [ {"bar":"baz"}, {"bar":"qux"} ] }}}';
+        $expectedJson = '{"foo": {"bar": {"baz": [ {"bar":"baz"}, {"bar":"otherValue"} ] }}}';
+
+        $operation = new \stdClass;
+        $operation->path = '/foo/bar/baz/1/bar';
+        $operation->value = 'otherValue';
+
+        $addOperation = new Add($operation);
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedJson,
+            $addOperation->perform($targetJson)
+        );
+    }
+
+    /**
+     * @test
      */
     public function shouldAddAnArrayValueAsExpected()
     {
