@@ -123,4 +123,42 @@ class PatchReplaceTest extends \PHPUnit_Framework_TestCase
             $patchedDocument
         );
     }
+
+    /**
+     * @test
+     * @ticket 37 (https://github.com/raphaelstolt/php-jsonpatch/issues/37)
+     */
+    public function shouldCorrectlyUseNumericIndexInObjectHandling()
+    {
+        $targetDocument = '{"foo": {"bar": {"baz": [ {"bar":"baz"}, {"bar":"qux"} ] }}}';
+        $patchDocument = '[{"op":"replace", "path":"/foo/bar/baz/1", "value":{"bar":"otherValue"} }]';
+        $expectedDocument = '{"foo": {"bar": {"baz": [ {"bar":"baz"}, {"bar":"otherValue"} ] }}}';
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
+
+    /**
+     * @test
+     * @ticket 37 (https://github.com/raphaelstolt/php-jsonpatch/issues/37)
+     */
+    public function shouldCorrectlyUseNumericIndexInObjectHandlingWithAddedSubProp()
+    {
+        $targetDocument = '{"foo": {"bar": {"baz": [ {"bar":"baz"}, {"bar":"qux"} ] }}}';
+        $patchDocument = '[{"op":"replace", "path":"/foo/bar/baz/1/bar", "value":"otherValue"}]';
+        $expectedDocument = '{"foo": {"bar": {"baz": [ {"bar":"baz"}, {"bar":"otherValue"} ] }}}';
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
 }

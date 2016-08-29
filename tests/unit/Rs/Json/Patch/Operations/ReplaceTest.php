@@ -98,6 +98,48 @@ class ReplaceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @ticket 37 (https://github.com/raphaelstolt/php-jsonpatch/issues/37)
+     */
+    public function shouldCorrectlyUseNumericIndexInObjectHandling()
+    {
+        $targetJson = '{"foo": {"bar": {"baz": [ {"bar":"baz"}, {"bar":"qux"} ] }}}';
+        $expectedJson = '{"foo": {"bar": {"baz": [ {"bar":"baz"}, {"bar":"otherValue"} ] }}}';
+
+        $operation = new \stdClass;
+        $operation->path = '/foo/bar/baz/1';
+        $operation->value = '{"bar":"otherValue"}';
+
+        $replaceOperation = new Replace($operation);
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedJson,
+            $replaceOperation->perform($targetJson)
+        );
+    }
+
+    /**
+     * @test
+     * @ticket 37 (https://github.com/raphaelstolt/php-jsonpatch/issues/37)
+     */
+    public function shouldCorrectlyUseNumericIndexInObjectHandlingWithAddedSubProp()
+    {
+        $targetJson = '{"foo": {"bar": {"baz": [ {"bar":"baz"}, {"bar":"qux"} ] }}}';
+        $expectedJson = '{"foo": {"bar": {"baz": [ {"bar":"baz"}, {"bar":"otherValue"} ] }}}';
+
+        $operation = new \stdClass;
+        $operation->path = '/foo/bar/baz/1/bar';
+        $operation->value = 'otherValue';
+
+        $replaceOperation = new Replace($operation);
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedJson,
+            $replaceOperation->perform($targetJson)
+        );
+    }
+
+    /**
+     * @test
      * @ticket 5 (https://github.com/raphaelstolt/php-jsonpatch/issues/5)
      */
     public function shouldReplaceWhenPathValueIsNull()
