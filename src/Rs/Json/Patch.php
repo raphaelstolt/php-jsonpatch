@@ -25,6 +25,7 @@ class Patch
      * @param  string $targetDocument
      * @param  string $patchDocument
      * @param  int $allowedPatchOperations
+     *
      * @throws \Rs\Json\Patch\InvalidTargetDocumentJsonException
      * @throws \Rs\Json\Patch\InvalidPatchDocumentJsonException
      * @throws \Rs\Json\Patch\InvalidOperationException
@@ -46,9 +47,8 @@ class Patch
     }
 
     /**
-     * @throws \Rs\Json\Patch\FailedTestException
-     *
      * @return string
+     * @throws \Rs\Json\Patch\FailedTestException
      */
     public function apply()
     {

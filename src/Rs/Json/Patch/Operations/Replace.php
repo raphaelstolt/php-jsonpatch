@@ -31,6 +31,7 @@ class Replace extends Operation
      * Guard the mandatory operation property
      *
      * @param  \stdClass $operation The operation structure.
+     *
      * @throws \Rs\Json\Patch\InvalidOperationException
      */
     protected function assertMandatories(\stdClass $operation)
@@ -44,7 +45,6 @@ class Replace extends Operation
      * @param  string $targetDocument
      *
      * @return string
-     *
      * @throws \Rs\Json\Patch\InvalidOperationException
      * @throws \Rs\Json\Pointer\InvalidJsonException
      * @throws \Rs\Json\Pointer\InvalidPointerException

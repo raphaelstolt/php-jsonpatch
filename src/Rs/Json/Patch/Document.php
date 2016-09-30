@@ -23,6 +23,7 @@ class Document
     /**
      * @param  string $patchDocument
      * @param  int $allowedPatchOperations
+     *
      * @throws \Rs\Json\Patch\InvalidOperationException
      */
     public function __construct($patchDocument, $allowedPatchOperations = null)
@@ -43,9 +44,9 @@ class Document
 
     /**
      * @param  string $patchDocument The patch document containing the patch operations.
-     * @throws \Rs\Json\Patch\InvalidOperationException
      *
      * @return Operation[]
+     * @throws \Rs\Json\Patch\InvalidOperationException
      */
     private function extractPatchOperations($patchDocument)
     {
@@ -82,9 +83,9 @@ class Document
 
     /**
      * @param  \stdClass $possiblePatchOperation
-     * @throws \Rs\Json\Patch\InvalidOperationException
      *
      * @return \Rs\Json\Patch\Operation or null on unsupported patch operation
+     * @throws \Rs\Json\Patch\InvalidOperationException
      */
     private function patchOperationFactory(\stdClass $possiblePatchOperation)
     {

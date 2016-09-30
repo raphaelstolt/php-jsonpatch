@@ -59,7 +59,6 @@ class Move extends Operation
      * @param  string $targetDocument
      *
      * @return string
-     *
      * @throws \Rs\Json\Patch\InvalidOperationException
      * @throws \Rs\Json\Pointer\InvalidJsonException
      * @throws \Rs\Json\Pointer\InvalidPointerException
