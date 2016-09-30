@@ -16,6 +16,9 @@ class Remove extends Operation
 
     /**
      * @param \stdClass $operation
+     *
+     * @throws \Rs\Json\Patch\InvalidOperationException
+     * @throws \RuntimeException
      */
     public function __construct(\stdClass $operation)
     {
@@ -36,6 +39,12 @@ class Remove extends Operation
      * @param  string $targetDocument
      *
      * @return string
+     *
+     * @throws \Rs\Json\Patch\InvalidOperationException
+     * @throws \Rs\Json\Pointer\InvalidJsonException
+     * @throws \Rs\Json\Pointer\InvalidPointerException
+     * @throws \Rs\Json\Pointer\NonWalkableJsonException
+     * @throws \RuntimeException
      */
     public function perform($targetDocument)
     {
@@ -53,8 +62,8 @@ class Remove extends Operation
     }
 
     /**
-     * @param array|object $json         The json_decode'd Json structure.
-     * @param array        $pointerParts The parts of the fed pointer.
+     * @param array|\stdClass $json         The json_decode'd Json structure.
+     * @param array           $pointerParts The parts of the fed pointer.
      */
     private function remove(&$json, array $pointerParts)
     {

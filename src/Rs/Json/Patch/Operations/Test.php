@@ -17,6 +17,9 @@ class Test extends Operation
 
     /**
      * @param \stdClass $operation
+     *
+     * @throws \Rs\Json\Patch\InvalidOperationException
+     * @throws \RuntimeException
      */
     public function __construct(\stdClass $operation)
     {
@@ -25,22 +28,15 @@ class Test extends Operation
     }
 
     /**
-     * Guard the mandatory operation property
-     *
-     * @param  \stdClass $operation $operation The operation structure.
-     * @throws \Rs\Json\Patch\InvalidOperationException
-     */
-    protected function assertMandatories(\stdClass $operation)
-    {
-        if (!property_exists($operation, 'value')) {
-            throw new InvalidOperationException('Mandatory value property not set');
-        }
-    }
-
-    /**
      * @param  string $targetDocument
      *
      * @return boolean
+     *
+     * @throws \Rs\Json\Patch\InvalidOperationException
+     * @throws \Rs\Json\Pointer\InvalidJsonException
+     * @throws \Rs\Json\Pointer\InvalidPointerException
+     * @throws \Rs\Json\Pointer\NonWalkableJsonException
+     * @throws \RuntimeException
      */
     public function perform($targetDocument)
     {
@@ -79,6 +75,20 @@ class Test extends Operation
         }
 
         return ($get === $value);
+    }
+
+    /**
+     * Guard the mandatory operation property
+     *
+     * @param  \stdClass $operation $operation The operation structure.
+     *
+     * @throws \Rs\Json\Patch\InvalidOperationException
+     */
+    protected function assertMandatories(\stdClass $operation)
+    {
+        if (!property_exists($operation, 'value')) {
+            throw new InvalidOperationException('Mandatory value property not set');
+        }
     }
 
     /**

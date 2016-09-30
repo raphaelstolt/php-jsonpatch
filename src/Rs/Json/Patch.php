@@ -9,7 +9,7 @@ use Rs\Json\Patch\FailedTestException;
 
 class Patch
 {
-    const MEDIA_TYPE = "application/json-patch+json";
+    const MEDIA_TYPE = 'application/json-patch+json';
 
     /**
      * @var string
@@ -27,6 +27,7 @@ class Patch
      * @param  int $allowedPatchOperations
      * @throws \Rs\Json\Patch\InvalidTargetDocumentJsonException
      * @throws \Rs\Json\Patch\InvalidPatchDocumentJsonException
+     * @throws \Rs\Json\Patch\InvalidOperationException
      */
     public function __construct($targetDocument, $patchDocument, $allowedPatchOperations = null)
     {
@@ -68,14 +69,14 @@ class Patch
             }
         }
 
-        $emtpyArray = '[]';
+        $emptyArray = '[]';
         $emptyObject = '{}';
-        if ($patchedDocument === $emtpyArray && $wasObject) {
+        if ($patchedDocument === $emptyArray && $wasObject) {
             $patchedDocument = $emptyObject;
         }
 
         if ($patchedDocument === $emptyObject && !$wasObject) {
-            $patchedDocument = $emtpyArray;
+            $patchedDocument = $emptyArray;
         }
 
         return $patchedDocument;
