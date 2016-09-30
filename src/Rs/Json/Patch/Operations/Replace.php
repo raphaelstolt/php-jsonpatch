@@ -17,6 +17,9 @@ class Replace extends Operation
 
     /**
      * @param \stdClass $operation
+     *
+     * @throws \Rs\Json\Patch\InvalidOperationException
+     * @throws \RuntimeException
      */
     public function __construct(\stdClass $operation)
     {
@@ -41,6 +44,12 @@ class Replace extends Operation
      * @param  string $targetDocument
      *
      * @return string
+     *
+     * @throws \Rs\Json\Patch\InvalidOperationException
+     * @throws \Rs\Json\Pointer\InvalidJsonException
+     * @throws \Rs\Json\Pointer\InvalidPointerException
+     * @throws \Rs\Json\Pointer\NonWalkableJsonException
+     * @throws \RuntimeException
      */
     public function perform($targetDocument)
     {

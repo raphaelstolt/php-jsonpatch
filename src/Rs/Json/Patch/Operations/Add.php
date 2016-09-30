@@ -17,6 +17,9 @@ class Add extends Operation
 
     /**
      * @param \stdClass $operation
+     *
+     * @throws \Rs\Json\Patch\InvalidOperationException
+     * @throws \RuntimeException
      */
     public function __construct(\stdClass $operation)
     {
@@ -28,6 +31,7 @@ class Add extends Operation
      * Guard the mandatory operation property
      *
      * @param  \stdClass $operation The operation structure.
+     *
      * @throws \Rs\Json\Patch\InvalidOperationException
      */
     protected function assertMandatories(\stdClass $operation)
@@ -53,6 +57,10 @@ class Add extends Operation
      * @param  string $targetDocument
      *
      * @return string
+     *
+     * @throws \Rs\Json\Pointer\InvalidJsonException
+     * @throws \Rs\Json\Pointer\InvalidPointerException
+     * @throws \Rs\Json\Pointer\NonWalkableJsonException
      */
     public function perform($targetDocument)
     {
@@ -86,7 +94,7 @@ class Add extends Operation
         if ($get === null && $lastPointerPart !== Pointer::LAST_ARRAY_ELEMENT_CHAR) {
             if (ctype_digit($lastPointerPart) && $lastPointerPart > count($rootGet)) {
                 if ($rootPointer == $lastPointerPart && is_array($targetDocument)) {
-                    if (intval($lastPointerPart) <= count($targetDocument) + 1) {
+                    if ((int) $lastPointerPart <= count($targetDocument) + 1) {
                         array_splice($targetDocument, $lastPointerPart, 0, $replacementValue);
                     }
                 }
@@ -148,7 +156,7 @@ class Add extends Operation
             }
 
             if ($targetArray === null) {
-                if (count($targetDocument) > 0 && is_numeric($additionIndex)) {
+                if (is_numeric($additionIndex) && count($targetDocument) > 0) {
                     array_splice($targetDocument, $additionIndex, 0, $replacementValue);
                 } else {
                     $targetDocument->{$additionIndex} = $value;

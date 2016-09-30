@@ -14,7 +14,7 @@ class Move extends Operation
      * @const int
      */
     const APPLY = 4;
-    
+
     /**
      * @var string
      */
@@ -22,6 +22,9 @@ class Move extends Operation
 
     /**
      * @param \stdClass $operation
+     *
+     * @throws \Rs\Json\Patch\InvalidOperationException
+     * @throws \RuntimeException
      */
     public function __construct(\stdClass $operation)
     {
@@ -42,6 +45,7 @@ class Move extends Operation
      * Guard the mandatory operation property
      *
      * @param  \stdClass $operation The operation structure.
+     *
      * @throws \Rs\Json\Patch\InvalidOperationException
      */
     protected function assertMandatories(\stdClass $operation)
@@ -55,6 +59,12 @@ class Move extends Operation
      * @param  string $targetDocument
      *
      * @return string
+     *
+     * @throws \Rs\Json\Patch\InvalidOperationException
+     * @throws \Rs\Json\Pointer\InvalidJsonException
+     * @throws \Rs\Json\Pointer\InvalidPointerException
+     * @throws \Rs\Json\Pointer\NonWalkableJsonException
+     * @throws \RuntimeException
      */
     public function perform($targetDocument)
     {

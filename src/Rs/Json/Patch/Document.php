@@ -1,8 +1,6 @@
 <?php
 namespace Rs\Json\Patch;
 
-use Rs\Json\Patch\InvalidOperationException;
-use Rs\Json\Patch\Operation;
 use Rs\Json\Patch\Operations\Add;
 use Rs\Json\Patch\Operations\Copy;
 use Rs\Json\Patch\Operations\Move;

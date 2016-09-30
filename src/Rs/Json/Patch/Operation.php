@@ -22,6 +22,7 @@ abstract class Operation
      * @param  string     $op
      * @param  \stdClass  $operation
      * @throws \Rs\Json\Patch\InvalidOperationException
+     * @throws \RuntimeException
      */
     public function __construct($op, \stdClass $operation)
     {
