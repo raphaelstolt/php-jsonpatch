@@ -1,5 +1,5 @@
 ### v3.0.2
-  * Fixed issue [#37](https://github.com/raphaelstolt/php-jsonpatch/issues/37) contributed by [@narcoticfresh](https://github.com/narcoticfresh)
+  * Fixed issue with top level remove contributed by [@digitalkaoz](https://github.com/digitalkaoz)
 
 ### v3.0.1
   * Fixed issue [#35](https://github.com/raphaelstolt/php-jsonpatch/issues/35) contributed by [@narcoticfresh](https://github.com/narcoticfresh)
