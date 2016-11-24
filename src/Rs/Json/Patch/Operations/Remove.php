@@ -92,7 +92,9 @@ class Remove extends Operation
         } elseif ($pointerPart === Pointer::LAST_ARRAY_ELEMENT_CHAR && is_array($json)) {
             unset($json[count($json) - 1]);
         } else {
-            if (is_object($json)) {
+            if (null === $pointerPart) {
+                $json = new \stdClass();
+            } elseif (is_object($json)) {
                 unset($json->{$pointerPart});
             } else {
                 unset($json[$pointerPart]);

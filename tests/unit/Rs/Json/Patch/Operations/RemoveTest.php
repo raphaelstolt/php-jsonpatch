@@ -121,6 +121,11 @@ class RemoveTest extends \PHPUnit_Framework_TestCase
                 'expected-json' => '["done", "started", "pending", "archived"]',
                 'remove-operation' => (object) array('path' => '/2'),
             )),
+            array(array(
+                'given-json' => '{"baz":"qux"}',
+                'expected-json' => '{}',
+                'remove-operation' => (object) array('path' => ''),
+            )),
         );
     }
 }
