@@ -26,7 +26,6 @@ matrix:
     - php: 5.5
     - php: 5.4
 
-matrix:
   fast_finish: true
   allow_failures:
     - php: nightly
