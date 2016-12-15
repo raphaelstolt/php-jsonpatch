@@ -1,5 +1,10 @@
 sudo: false
 
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.php-cs-fixer
+
 notifications:
   email:
     on_success: never
@@ -7,14 +12,19 @@ notifications:
 
 language: php
 
-php:
-  - hhvm
-  - nightly
-  - 7.1
-  - 7
-  - 5.6
-  - 5.5
-  - 5.4
+matrix:
+  include:
+    - php: hhvm-3.9
+      sudo: required
+      dist: trusty
+      group: edge
+    - php: nightly
+    - php: 7.1
+      env: LINT=true
+    - php: 7.0
+    - php: 5.6
+    - php: 5.5
+    - php: 5.4
 
 matrix:
   fast_finish: true
@@ -30,4 +40,7 @@ install:
   - composer install
 
 script:
+  - if [[ $LINT = true ]]; then
+      composer cs-lint;
+    fi
   - composer test
