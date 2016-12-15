@@ -2,10 +2,10 @@
 namespace Rs\Json;
 
 use Rs\Json\Patch\Document;
-use Rs\Json\Patch\Operations\Test;
+use Rs\Json\Patch\FailedTestException;
 use Rs\Json\Patch\InvalidPatchDocumentJsonException;
 use Rs\Json\Patch\InvalidTargetDocumentJsonException;
-use Rs\Json\Patch\FailedTestException;
+use Rs\Json\Patch\Operations\Test;
 
 class Patch
 {
@@ -47,8 +47,8 @@ class Patch
     }
 
     /**
-     * @return string
      * @throws \Rs\Json\Patch\FailedTestException
+     * @return string
      */
     public function apply()
     {

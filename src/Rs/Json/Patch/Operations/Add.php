@@ -56,10 +56,10 @@ class Add extends Operation
     /**
      * @param  string $targetDocument
      *
-     * @return string
      * @throws \Rs\Json\Pointer\InvalidJsonException
      * @throws \Rs\Json\Pointer\InvalidPointerException
      * @throws \Rs\Json\Pointer\NonWalkableJsonException
+     * @return string
      */
     public function perform($targetDocument)
     {
