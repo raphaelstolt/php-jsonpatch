@@ -88,7 +88,7 @@ class Replace extends Operation
             $value = $this->getValue();
         }
 
-        if (is_object($json) && array_key_exists($pointerPart, get_object_vars($json))) {
+        if (is_object($json)) {
             if (count($pointerParts) === 0) {
                 $json->{$pointerPart} = $value;
             } else {
@@ -100,7 +100,7 @@ class Replace extends Operation
             }
         } elseif ($pointerPart === Pointer::LAST_ARRAY_ELEMENT_CHAR && is_array($json)) {
             $json[count($json) - 1] = $value;
-        } elseif (is_array($json) && isset($json[$pointerPart])) {
+        } elseif (is_array($json)) {
             if (count($pointerParts) === 0) {
                 $json[$pointerPart] = $value;
             } else {
