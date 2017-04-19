@@ -41,6 +41,26 @@ class PatchAddTest extends \PHPUnit_Framework_TestCase
             $patchedDocument
         );
     }
+
+    /**
+     * @test
+     */
+    public function shouldAddEmptyObjectSameLevel()
+    {
+        $targetDocument = '{"foo": {"bar": {"baz": {"boo": {}, "qux": "value"}}}}';
+        $patchDocument = '[{"op":"add", "path":"/foo/bar/baz/qux", "value":"value2"}]';
+
+        $expectedDocument = '{"foo": {"bar": {"baz": {"boo": {}, "qux": "value2"}}}}';
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
+
     /**
      * @test
      * @ticket 33 (https://github.com/raphaelstolt/php-jsonpatch/issues/33)
