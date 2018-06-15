@@ -19,7 +19,7 @@ Patch operations are defined in JSON and bundled in an array. Available JSON Pat
 and `test`; if their mandatory properties are not set a `Rs\Json\Patch\InvalidOperationException` will be
 thrown.
 
-If necessary you can disable some patch operations by setting a whitelist bitmask in the constructor e.g. `$patch = new Patch($targetDocument, $patchDocument, Add::APPLY | Copy::APPLY | Replace::APPLY | Remove::APPLY);`. This will not allow the usage of the `move` and `test` patch operation from the patch document. If used, these operations are just ignored. The default is to allow all patch operations.
+If necessary you can disable some patch operations by setting a whitelist bitmask in the constructor e.g. `$patch = new Patch($targetDocument, $patchDocument, Add::APPLY | Copy::APPLY | Replace::APPLY | Remove::APPLY);`. This will not allow the usage of the `move` and `test` patch operation from the patch document. If used these operations are ignored. The default is to allow all patch operations.
 
 ``` php
 <?php require_once 'vendor/autoload.php';
