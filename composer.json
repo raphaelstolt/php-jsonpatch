@@ -20,6 +20,9 @@
         "symfony/polyfill-mbstring": "^1.1",
         "php-jsonpointer/php-jsonpointer": "^3.0"
     },
+    "suggest": {
+        "ext-mbstring": "If ext-mbstring is not available you MUST install symfony/polyfill-mbstring"
+    },
     "require-dev": {
         "phpunit/phpunit": "4.6.*",
         "friendsofphp/php-cs-fixer": "^2.0"
