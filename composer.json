@@ -16,7 +16,7 @@
         "issues": "https://github.com/raphaelstolt/php-jsonpatch/issues"
     },
     "require": {
-        "php": ">=5.4",
+        "php": ">=7.2",
         "symfony/polyfill-mbstring": "^1.1",
         "php-jsonpointer/php-jsonpointer": "^3.0"
     },

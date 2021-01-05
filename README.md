@@ -1,6 +1,6 @@
 # JSON Patch for PHP
 
-[![Build Status](https://secure.travis-ci.org/raphaelstolt/php-jsonpatch.png)](http://travis-ci.org/raphaelstolt/php-jsonpatch) [![Version](http://img.shields.io/packagist/v/php-jsonpatch/php-jsonpatch.svg?style=flat)](https://packagist.org/packages/php-jsonpatch/php-jsonpatch) [![PHP Version](http://img.shields.io/badge/php-5.4+-ff69b4.svg)](https://packagist.org/packages/php-jsonpatch/php-jsonpatch)
+[![Build Status](https://secure.travis-ci.org/raphaelstolt/php-jsonpatch.png)](http://travis-ci.org/raphaelstolt/php-jsonpatch) [![Version](http://img.shields.io/packagist/v/php-jsonpatch/php-jsonpatch.svg?style=flat)](https://packagist.org/packages/php-jsonpatch/php-jsonpatch) [![PHP Version](https://img.shields.io/badge/php-7.2+-ff69b4.svg)](https://packagist.org/packages/php-jsonpatch/php-jsonpatch)
 
 This is an implementation of [JSON Patch](http://tools.ietf.org/html/rfc6902) written in PHP.
 
