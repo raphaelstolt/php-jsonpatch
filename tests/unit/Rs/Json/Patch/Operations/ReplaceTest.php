@@ -1,23 +1,27 @@
 <?php
 namespace Rs\Json\Patch\Operations;
 
+use PHPUnit\Framework\TestCase;
+use Rs\Json\Patch\InvalidOperationException;
 use Rs\Json\Patch\Operations\Replace;
 
-class ReplaceTest extends \PHPUnit_Framework_TestCase
+class ReplaceTest extends TestCase
 {
     /**
      * @test
-     * @expectedException Rs\Json\Patch\InvalidOperationException
-     * @expectedExceptionMessage Mandatory value property not set
      */
     public function missingManadatoryOperationKeyShouldThrowExpectedException()
     {
+        $this->expectException(InvalidOperationException::class);
+        $this->expectExceptionMessage('Mandatory value property not set');
+
         $operation = new \stdClass;
         $operation->path = '/a/b/c';
         $operation->volume = 42;
 
         $moveOperation = new Replace($operation);
     }
+
     /**
      * @test
      * @dataProvider replaceProvider
@@ -35,6 +39,7 @@ class ReplaceTest extends \PHPUnit_Framework_TestCase
             $addOperation->perform($targetJson)
         );
     }
+
     /**
      * @test
      */

@@ -1,9 +1,10 @@
 <?php
 namespace Rs\Json;
 
+use PHPUnit\Framework\TestCase;
 use Rs\Json\Patch;
 
-class PatchReplaceTest extends \PHPUnit_Framework_TestCase
+class PatchReplaceTest extends TestCase
 {
     /**
      * @test

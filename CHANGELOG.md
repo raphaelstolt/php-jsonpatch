@@ -1,3 +1,6 @@
+### v4.0.0
+  * Dropped support for unsupported PHP versions
+
 ### v3.0.2
   * Fixed issue with top level remove contributed by [@digitalkaoz](https://github.com/digitalkaoz)
 

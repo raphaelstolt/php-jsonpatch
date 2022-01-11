@@ -1,23 +1,27 @@
 <?php
 namespace Rs\Json\Patch\Operations;
 
+use PHPUnit\Framework\TestCase;
+use Rs\Json\Patch\InvalidOperationException;
 use Rs\Json\Patch\Operations;
 
-class MoveTest extends \PHPUnit_Framework_TestCase
+class MoveTest extends TestCase
 {
     /**
      * @test
-     * @expectedException Rs\Json\Patch\InvalidOperationException
-     * @expectedExceptionMessage Mandatory from property not set
      */
     public function missingManadatoryOperationKeyShouldThrowExpectedException()
     {
+        $this->expectException(InvalidOperationException::class);
+        $this->expectExceptionMessage('Mandatory from property not set');
+
         $operation = new \stdClass;
         $operation->to = '/a/b/c';
         $operation->path = '/a/b/d';
 
         $moveOperation = new Move($operation);
     }
+
     /**
      * @test
      */
@@ -36,6 +40,7 @@ class MoveTest extends \PHPUnit_Framework_TestCase
             $moveOperation->perform($targetJson)
         );
     }
+
     /**
      * @test
      * @dataProvider moveProvider

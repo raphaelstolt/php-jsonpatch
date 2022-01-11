@@ -1,9 +1,10 @@
 <?php
 namespace Rs\Json\Patch\Operations;
 
+use PHPUnit\Framework\TestCase;
 use Rs\Json\Patch\Operations;
 
-class RemoveTest extends \PHPUnit_Framework_TestCase
+class RemoveTest extends TestCase
 {
     /**
      * @test
@@ -17,6 +18,7 @@ class RemoveTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('remove', $removeOperation->getName());
     }
+
     /**
      * @test
      */
@@ -34,6 +36,7 @@ class RemoveTest extends \PHPUnit_Framework_TestCase
             $removeOperation->perform($targetJson)
         );
     }
+
     /**
      * @test
      * @ticket 35 (https://github.com/raphaelstolt/php-jsonpatch/issues/35)
@@ -53,6 +56,7 @@ class RemoveTest extends \PHPUnit_Framework_TestCase
             $removeOperation->perform($targetJson)
         );
     }
+
     /**
      * @test
      * @ticket 35 (https://github.com/raphaelstolt/php-jsonpatch/issues/35)
@@ -72,6 +76,7 @@ class RemoveTest extends \PHPUnit_Framework_TestCase
             $removeOperation->perform($targetJson)
         );
     }
+
     /**
      * @test
      * @dataProvider removeProvider

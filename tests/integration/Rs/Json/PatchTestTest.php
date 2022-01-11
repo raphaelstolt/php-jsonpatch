@@ -1,17 +1,21 @@
 <?php
 namespace Rs\Json;
 
+use PHPUnit\Framework\TestCase;
 use Rs\Json\Patch;
+use Rs\Json\Patch\FailedTestException;
+use Rs\Json\Pointer\InvalidPointerException;
 
-class PatchTestTest extends \PHPUnit_Framework_TestCase
+class PatchTestTest extends TestCase
 {
     /**
      * @test
-     * @expectedException Rs\Json\Patch\FailedTestException
-     * @expectedExceptionMessage Failed on Test PatchOperation at index:
      */
     public function shouldThrowFailedTestExceptionWhenTestFails()
     {
+        $this->expectException(FailedTestException::class);
+        $this->expectExceptionMessage('Failed on Test PatchOperation at index:');
+
         $expectedDocument = $targetDocument = '{"foo":"bar"}';
         $patchDocument = '[
           {"op":"test", "path":"/baz", "value":"qux"},
@@ -26,13 +30,15 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
             $patchedDocument
         );
     }
+
     /**
      * @test
-     * @expectedException Rs\Json\Patch\FailedTestException
-     * @expectedExceptionMessage Failed on Test PatchOperation at index:
      */
     public function shouldThrowFailedTestExceptionWhenTestFailsForPriorPatch()
     {
+        $this->expectException(FailedTestException::class);
+        $this->expectExceptionMessage('Failed on Test PatchOperation at index:');
+
         $expectedDocument = $targetDocument = '{"a":{"b":{"c": 100}}}';
         $patchDocument = '[
           {"op":"replace", "path":"/a/b/c", "value":42 },
@@ -47,13 +53,15 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
             $patchedDocument
         );
     }
+
     /**
      * @test
-     * @expectedException Rs\Json\Patch\FailedTestException
-     * @expectedExceptionMessage Failed on Test PatchOperation at index:
      */
     public function shouldThrowFailedTestExceptionWhenUsingPointerEscapes()
     {
+        $this->expectException(FailedTestException::class);
+        $this->expectExceptionMessage('Failed on Test PatchOperation at index:');
+
         $expectedDocument = $targetDocument = '{"/": 9, " ~1": 10}';
         $patchDocument = '[ {"op":"test", "path":"/~01", "value": 10} ]';
 
@@ -67,11 +75,12 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
     }
     /**
      * @test
-     * @expectedException Rs\Json\Patch\FailedTestException
-     * @expectedExceptionMessage Failed on Test PatchOperation at index:
      */
     public function shouldThrowFailedTestExceptionWhenTestFailsForUnsuccessfulComparison()
     {
+        $this->expectException(FailedTestException::class);
+        $this->expectExceptionMessage('Failed on Test PatchOperation at index:');
+
         $expectedDocument = $targetDocument = '{"/": 9, " ~1": 10}';
         $patchDocument = '[ {"op":"test", "path":"/~01", "value":"10"} ]';
 
@@ -83,6 +92,7 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
             $patchedDocument
         );
     }
+
     /**
      * @test
      * @ticket 8 (https://github.com/raphaelstolt/php-jsonpatch/issues/8)
@@ -100,13 +110,15 @@ class PatchTestTest extends \PHPUnit_Framework_TestCase
             $patchedDocument
         );
     }
+
     /**
      * @test
-     * @expectedException Rs\Json\Pointer\InvalidPointerException
-     * @expectedExceptionMessage Pointer starts with invalid character
      */
     public function shouldThrowExceptionOnUsageOfUriFragmentIdentifierInPatch()
     {
+        $this->expectException(InvalidPointerException::class);
+        $this->expectExceptionMessage('Pointer starts with invalid character');
+
         $targetDocument = '{"foo":"bar"}';
         $patchDocument = '[{"op":"add", "path":"#/baz", "value":[1,2,3]}]';
         $expectedDocument = '{"foo":"bar","baz":[1,2,3]}';

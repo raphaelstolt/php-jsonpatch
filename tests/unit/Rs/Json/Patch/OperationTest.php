@@ -1,23 +1,27 @@
 <?php
 namespace Rs\Json\Patch;
 
+use PHPUnit\Framework\TestCase;
+use Rs\Json\Patch\InvalidOperationException;
 use Rs\Json\Patch\Operations\Add;
 use Rs\Json\Patch\Operations\Remove;
 use Rs\Json\Patch\Operations\Replace;
 
-class OperationTest extends \PHPUnit_Framework_TestCase
+class OperationTest extends TestCase
 {
     /**
      * @test
-     * @expectedException Rs\Json\Patch\InvalidOperationException
-     * @expectedExceptionMessage No path property set for patch operation
      */
     public function shouldThrowExpectedExceptionOnMissingPath()
     {
+        $this->expectException(InvalidOperationException::class);
+        $this->expectExceptionMessage('No path property set for patch operation');
+
         $operation = new \stdClass;
         $operation->value = array('foo', 'bar');
         $addOperation = new Add($operation);
     }
+
     /**
      * @test
      */
@@ -33,6 +37,7 @@ class OperationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($operation->path, $replaceOperation->getPath());
         $this->assertEquals($operation->value, $replaceOperation->getValue());
     }
+
     /**
      * @test
      */

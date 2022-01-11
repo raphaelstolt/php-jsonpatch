@@ -1,9 +1,12 @@
 <?php
 namespace Rs\Json;
 
+use PHPUnit\Framework\TestCase;
 use Rs\Json\Patch;
+use Rs\Json\Patch\InvalidPatchDocumentJsonException;
+use Rs\Json\Patch\InvalidTargetDocumentJsonException;
 
-class PatchTest extends \PHPUnit_Framework_TestCase
+class PatchTest extends TestCase
 {
     /**
      * @test
@@ -12,24 +15,28 @@ class PatchTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('application/json-patch+json', Patch::MEDIA_TYPE);
     }
+
     /**
      * @test
-     * @expectedException Rs\Json\Patch\InvalidTargetDocumentJsonException
-     * @expectedExceptionMessage Cannot operate on invalid Json.
      * @dataProvider invalidJsonProvider
      */
     public function shouldThrowExpectedExceptionOnInvalidTargetDocument($invalidJson)
     {
+        $this->expectException(InvalidTargetDocumentJsonException::class);
+        $this->expectExceptionMessage('Cannot operate on invalid Json.');
+
         $patch = new Patch($invalidJson, '{"op":"test", "path":"/a/b/c", "value":"foo"}');
     }
+
     /**
      * @test
-     * @expectedException Rs\Json\Patch\InvalidPatchDocumentJsonException
-     * @expectedExceptionMessage Cannot operate on invalid Json.
      * @dataProvider invalidJsonProvider
      */
     public function shouldThrowExpectedExceptionOnInvalidPatchDocument($invalidJson)
     {
+        $this->expectException(InvalidPatchDocumentJsonException::class);
+        $this->expectExceptionMessage('Cannot operate on invalid Json.');
+
         $patch = new Patch('{"a":"foo"}', $invalidJson);
     }
 

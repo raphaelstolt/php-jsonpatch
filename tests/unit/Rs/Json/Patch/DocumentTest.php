@@ -1,7 +1,9 @@
 <?php
 namespace Rs\Json\Patch;
 
+use PHPUnit\Framework\TestCase;
 use Rs\Json\Patch\Document;
+use Rs\Json\Patch\InvalidOperationException;
 use Rs\Json\Patch\Operations\Add;
 use Rs\Json\Patch\Operations\Copy;
 use Rs\Json\Patch\Operations\Move;
@@ -9,28 +11,31 @@ use Rs\Json\Patch\Operations\Remove;
 use Rs\Json\Patch\Operations\Replace;
 use Rs\Json\Patch\Operations\Test;
 
-class DocumentTest extends \PHPUnit_Framework_TestCase
+class DocumentTest extends TestCase
 {
     /**
      * @test
-     * @expectedException Rs\Json\Patch\InvalidOperationException
-     * @expectedExceptionMessage Unable to extract patch operations from '
      * @dataProvider emptyPatchDocumentProvider
      */
     public function shouldThrowExpectedExceptionOnEmptyPatchDocument($patchDocument)
     {
+        $this->expectException(InvalidOperationException::class);
+        $this->expectExceptionMessage('Unable to extract patch operations from');
+
         $document = new Document($patchDocument);
     }
     /**
      * @test
-     * @expectedException Rs\Json\Patch\InvalidOperationException
-     * @expectedExceptionMessage No
      * @dataProvider nonePatchDocumentProvider
      */
     public function shouldThrowExpectedExceptionOnNonePatchDocument($patchDocument)
     {
+        $this->expectException(InvalidOperationException::class);
+        $this->expectExceptionMessage('No');
+
         $document = new Document($patchDocument);
     }
+
     /**
      * @test
      * @dataProvider addPatchDocumentProvider
@@ -46,6 +51,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             $patchOperations
         );
     }
+
     /**
      * @test
      */
@@ -58,6 +64,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(0, $patchOperations);
         $this->assertEmpty($patchOperations);
     }
+
     /**
      * @test
      * @dataProvider copyPatchDocumentProvider
@@ -73,6 +80,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             $patchOperations
         );
     }
+
     /**
      * @test
      * @dataProvider movePatchDocumentProvider
@@ -88,6 +96,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             $patchOperations
         );
     }
+
     /**
      * @test
      * @dataProvider removePatchDocumentProvider
@@ -103,6 +112,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             $patchOperations
         );
     }
+
     /**
      * @test
      * @dataProvider replacePatchDocumentProvider
@@ -118,9 +128,10 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             $patchOperations
         );
     }
+
     /**
      * @test
-     * @dataProvider testPatchDocumentProvider
+     * @dataProvider patchForTestDocumentProvider
      */
     public function shouldReturnAnArrayOfTestPatchOperationsOnTestPatchDocument($patchDocument)
     {
@@ -133,6 +144,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             $patchOperations
         );
     }
+
     /**
      * @test
      * @dataProvider patchDocumentProvider
@@ -233,11 +245,12 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Rs\Json\Patch\InvalidOperationException
      * @dataProvider invalidPatchDocumentProvider
      */
     public function shouldThrowExpectedExceptionOnInvalidPatchDocument($invalidPatchDocument)
     {
+        $this->expectException(InvalidOperationException::class);
+
         $document = new Document(json_encode($invalidPatchDocument));
     }
 
@@ -262,6 +275,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             ))),
         );
     }
+
     /**
      * @return array
      */
@@ -274,6 +288,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             ))),
         );
     }
+
     /**
      * @return array
      */
@@ -286,6 +301,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             ))),
         );
     }
+
     /**
      * @return array
      */
@@ -298,6 +314,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             ))),
         );
     }
+
     /**
      * @return array
      */
@@ -310,6 +327,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             ))),
         );
     }
+
     /**
      * @return array
      */
@@ -322,6 +340,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             ))),
         );
     }
+
     /**
      * @return array
      */
@@ -338,10 +357,11 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             ))),
         );
     }
+
     /**
      * @return array
      */
-    public function testPatchDocumentProvider()
+    public function patchForTestDocumentProvider()
     {
         return array(
             array(json_encode(array(
@@ -350,6 +370,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             ))),
         );
     }
+
     /**
      * @return array
      */
@@ -366,6 +387,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
             array(json_encode('0')),
         );
     }
+
     /**
      * @return array
      */

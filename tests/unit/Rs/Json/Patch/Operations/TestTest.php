@@ -1,23 +1,27 @@
 <?php
 namespace Rs\Json\Patch\Operations;
 
+use PHPUnit\Framework\TestCase;
+use Rs\Json\Patch\InvalidOperationException;
 use Rs\Json\Patch\Operations;
 
-class TestTest extends \PHPUnit_Framework_TestCase
+class TestTest extends TestCase
 {
     /**
      * @test
-     * @expectedException Rs\Json\Patch\InvalidOperationException
-     * @expectedExceptionMessage Mandatory value property not set
      */
     public function missingManadatoryOperationKeyShouldThrowExpectedException()
     {
+        $this->expectException(InvalidOperationException::class);
+        $this->expectExceptionMessage('Mandatory value property not set');
+
         $operation = new \stdClass;
         $operation->path = '/a/b/d';
         $operation->valuer = 'foo';
 
         $testOperation = new Test($operation);
     }
+
     /**
      * @test
      * @dataProvider matchingObjectProvider
@@ -31,6 +35,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($testOperation->perform($targetJson));
     }
+
     /**
      * @test
      * @dataProvider noneMatchingPointerProvider
@@ -44,6 +49,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($testOperation->perform($targetJson));
     }
+
     /**
      * @test
      * @dataProvider matchingStringProvider
@@ -57,6 +63,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($testOperation->perform($targetJson));
     }
+
     /**
      * @test
      * @dataProvider noneMatchingStringProvider
@@ -70,6 +77,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($testOperation->perform($targetJson));
     }
+
     /**
      * @test
      * @dataProvider matchingNumberProvider
@@ -83,6 +91,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($testOperation->perform($targetJson));
     }
+
     /**
      * @test
      * @dataProvider noneMatchingNumberProvider
@@ -96,6 +105,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($testOperation->perform($targetJson));
     }
+
     /**
      * @test
      * @dataProvider matchingLiteralProvider
@@ -109,6 +119,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($testOperation->perform($targetJson));
     }
+
     /**
      * @test
      * @dataProvider noneMatchingLiteralProvider
@@ -122,6 +133,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($testOperation->perform($targetJson));
     }
+
     /**
      * @test
      */
@@ -135,6 +147,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($testOperation->perform('{"chars":{"array":["abc","def"]}}'));
     }
+
     /**
      * @test
      */
@@ -169,6 +182,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
             )),
         );
     }
+
     /**
      * @return array
      */
@@ -189,6 +203,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
             )),
         );
     }
+
     /**
      * @return array
      */
@@ -209,6 +224,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
             )),
         );
     }
+
     /**
      * @return array
      */
@@ -229,6 +245,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
             )),
         );
     }
+
     /**
      * @return array
      */
@@ -249,6 +266,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
             )),
         );
     }
+
     /**
      * @return array
      */
@@ -277,6 +295,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
             )),
         );
     }
+
     /**
      * @return array
      */
@@ -297,6 +316,7 @@ class TestTest extends \PHPUnit_Framework_TestCase
             )),
         );
     }
+
     /**
      * @return array
      */

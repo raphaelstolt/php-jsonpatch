@@ -1,23 +1,27 @@
 <?php
 namespace Rs\Json\Patch\Operations;
 
+use PHPUnit\Framework\TestCase;
+use Rs\Json\Patch\InvalidOperationException;
 use Rs\Json\Patch\Operations;
 
-class AddTest extends \PHPUnit_Framework_TestCase
+class AddTest extends TestCase
 {
     /**
      * @test
-     * @expectedException Rs\Json\Patch\InvalidOperationException
-     * @expectedExceptionMessage Mandatory value property not set
      */
     public function missingManadatoryOperationKeyShouldThrowExpectedException()
     {
+        $this->expectException(InvalidOperationException::class);
+        $this->expectExceptionMessage('Mandatory value property not set');
+
         $operation = new \stdClass;
         $operation->salue = 17;
         $operation->path = '/a/b/d';
 
         $addOperation = new Add($operation);
     }
+
     /**
      * @test
      * @dataProvider addProvider
@@ -35,6 +39,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
             $addOperation->perform($targetJson)
         );
     }
+
     /**
      * @test
      */
@@ -57,6 +62,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
             $addOperation->perform($targetJson)
         );
     }
+
     /**
      * @test
      */
@@ -76,6 +82,7 @@ class AddTest extends \PHPUnit_Framework_TestCase
             $addOperation->perform($targetJson)
         );
     }
+
     /**
      * @test
      */
