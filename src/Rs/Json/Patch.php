@@ -48,7 +48,7 @@ class Patch
 
     /**
      * @throws \Rs\Json\Patch\FailedTestException
-     * @return string
+     * @return mixed
      */
     public function apply()
     {

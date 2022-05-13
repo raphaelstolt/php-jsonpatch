@@ -42,6 +42,26 @@ class PatchAddTest extends TestCase
             $patchedDocument
         );
     }
+
+    /**
+     * @test
+     */
+    public function shouldAllowPathAsAnArray()
+    {
+        $targetDocument = '{"foo":{"obj": {"property": "value", "emptyObj": {}}}}';
+        $patchDocument = '[{"op":"add", "path":["foo", "obj", "anotherProp"], "value":"qux"}]';
+        $expectedDocument = '{"foo":{"obj": {"property": "value", "anotherProp": "qux", "emptyObj": {}}}}';
+
+        $patch = new Patch($targetDocument, $patchDocument);
+        $patchedDocument = $patch->apply();
+
+        $this->assertJsonStringEqualsJsonString(
+            $expectedDocument,
+            $patchedDocument
+        );
+    }
+
+
     /**
      * @test
      * @ticket 33 (https://github.com/raphaelstolt/php-jsonpatch/issues/33)

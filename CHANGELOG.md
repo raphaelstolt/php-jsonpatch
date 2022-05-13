@@ -1,3 +1,5 @@
+### v4.1.0
+  * Additional ability to inject path as an array. Closes issue [50](https://github.com/raphaelstolt/php-jsonpatch/issues/50).
 ### v4.0.0
   * Dropped support for unsupported PHP versions
 

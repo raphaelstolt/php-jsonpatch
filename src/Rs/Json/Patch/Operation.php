@@ -9,7 +9,7 @@ abstract class Operation
     protected $name;
 
     /**
-     * @var string
+     * @var string|array
      */
     protected $path;
 
@@ -62,10 +62,13 @@ abstract class Operation
     }
 
     /**
-     * @return string
+     * @return string|array
      */
     public function getPath()
     {
+        if (is_array($this->path)) {
+            return '/'.implode('/', $this->path);
+        }
         return $this->path;
     }
 
@@ -81,7 +84,7 @@ abstract class Operation
     }
 
     /**
-     * @param  string $targetDocument
+     * @param  mixed $targetDocument
      *
      * @return mixed
      */
