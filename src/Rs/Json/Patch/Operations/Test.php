@@ -35,9 +35,8 @@ class Test extends Operation
      * @throws \Rs\Json\Pointer\InvalidPointerException
      * @throws \Rs\Json\Pointer\NonWalkableJsonException
      * @throws \RuntimeException
-     * @return boolean
      */
-    public function perform($targetDocument)
+    public function perform(mixed $targetDocument): string|bool
     {
         $pointer = new Pointer($targetDocument);
 
@@ -83,7 +82,7 @@ class Test extends Operation
      *
      * @throws \Rs\Json\Patch\InvalidOperationException
      */
-    protected function assertMandatories(\stdClass $operation)
+    protected function assertMandatories(\stdClass $operation):void
     {
         if (!property_exists($operation, 'value')) {
             throw new InvalidOperationException('Mandatory value property not set');
@@ -92,12 +91,8 @@ class Test extends Operation
 
     /**
      * Check if string is a valid JSON string
-     *
-     * @param  string  $string
-     *
-     * @return boolean
      */
-    private function isValidJsonString($string)
+    private function isValidJsonString(mixed $string):bool
     {
         if (is_string($string) && strlen($string)) {
             // Decode and check last error

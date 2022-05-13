@@ -31,10 +31,9 @@ class Replace extends Operation
      * Guard the mandatory operation property
      *
      * @param  \stdClass $operation The operation structure.
-     *
      * @throws \Rs\Json\Patch\InvalidOperationException
      */
-    protected function assertMandatories(\stdClass $operation)
+    protected function assertMandatories(\stdClass $operation):void
     {
         if (!property_exists($operation, 'value')) {
             throw new InvalidOperationException('Mandatory value property not set');
@@ -49,9 +48,8 @@ class Replace extends Operation
      * @throws \Rs\Json\Pointer\InvalidPointerException
      * @throws \Rs\Json\Pointer\NonWalkableJsonException
      * @throws \RuntimeException
-     * @return string
      */
-    public function perform($targetDocument)
+    public function perform(mixed $targetDocument): string|false
     {
         $pointer = new Pointer($targetDocument);
         try {
@@ -76,7 +74,7 @@ class Replace extends Operation
      * @param array           $pointerParts The parts of the fed pointer.
      * @param mixed           $value        The value to replace.
      */
-    private function replace(&$json, array $pointerParts, $value = null)
+    private function replace(&$json, array $pointerParts, $value = null):void
     {
         $pointerPart = array_shift($pointerParts);
 

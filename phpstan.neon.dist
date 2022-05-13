@@ -1,0 +1,14 @@
+parameters:
+    level: max
+    paths:
+        - src
+    reportUnmatchedIgnoredErrors: false
+    checkMissingIterableValueType: false
+    ignoreErrors:
+        - '#function json_decode expects string#'
+        - '#Pointer#'
+        - '#function count expects#'
+        - '#Strict comparison using === between int#'
+        - '#array_splice#'
+        - '#\$possiblePatchOperation#'
+        - '#mixed supplied for foreach#'

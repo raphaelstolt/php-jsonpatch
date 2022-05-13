@@ -63,9 +63,8 @@ class Move extends Operation
      * @throws \Rs\Json\Pointer\InvalidPointerException
      * @throws \Rs\Json\Pointer\NonWalkableJsonException
      * @throws \RuntimeException
-     * @return string
      */
-    public function perform($targetDocument)
+    public function perform(mixed $targetDocument):mixed
     {
         $pointer = new Pointer($targetDocument);
         try {

@@ -21,12 +21,9 @@ class Document
     private $allowedPatchOperations;
 
     /**
-     * @param  string $patchDocument
-     * @param  int $allowedPatchOperations
-     *
      * @throws \Rs\Json\Patch\InvalidOperationException
      */
-    public function __construct($patchDocument, $allowedPatchOperations = null)
+    public function __construct(string $patchDocument, int $allowedPatchOperations = null)
     {
         $defaultPatchOperations = Add::APPLY | Copy::APPLY | Move::APPLY | Remove::APPLY | Replace::APPLY | Test::APPLY;
         $this->allowedPatchOperations = null !== $allowedPatchOperations ? $allowedPatchOperations : $defaultPatchOperations;
@@ -43,12 +40,12 @@ class Document
     }
 
     /**
-     * @param  string $patchDocument The patch document containing the patch operations.
+     * @param  iterable|string $patchDocument The patch document containing the patch operations.
      *
      * @throws \Rs\Json\Patch\InvalidOperationException
      * @return Operation[]
      */
-    private function extractPatchOperations($patchDocument)
+    private function extractPatchOperations(iterable|string $patchDocument)
     {
         $patchDocument = json_decode($patchDocument);
 
@@ -71,21 +68,14 @@ class Document
         return $patchOperations;
     }
 
-    /**
-     * @param mixed $patchDocument
-     *
-     * @return bool
-     */
-    private function isEmptyPatchDocument($patchDocument)
+    private function isEmptyPatchDocument(mixed $patchDocument):bool
     {
         return (empty($patchDocument) || !is_array($patchDocument) || count($patchDocument) === 0);
     }
 
     /**
-     * @param  \stdClass $possiblePatchOperation
-     *
      * @throws \Rs\Json\Patch\InvalidOperationException
-     * @return \Rs\Json\Patch\Operation or null on unsupported patch operation
+     * @return \Rs\Json\Patch\Operation| null on unsupported patch operation
      */
     private function patchOperationFactory(\stdClass $possiblePatchOperation)
     {
@@ -104,42 +94,36 @@ class Document
                 }
 
                 return new Add($possiblePatchOperation);
-                break;
             case 'copy':
                 if (!(($this->allowedPatchOperations & Copy::APPLY) == Copy::APPLY)) {
                     return null;
                 }
 
                 return new Copy($possiblePatchOperation);
-                break;
             case 'move':
                 if (!(($this->allowedPatchOperations & Move::APPLY) == Move::APPLY)) {
                     return null;
                 }
 
                 return new Move($possiblePatchOperation);
-                break;
             case 'replace':
                 if (!(($this->allowedPatchOperations & Replace::APPLY) == Replace::APPLY)) {
                     return null;
                 }
 
                 return new Replace($possiblePatchOperation);
-                break;
             case 'remove':
                 if (!(($this->allowedPatchOperations & Remove::APPLY) == Remove::APPLY)) {
                     return null;
                 }
 
                 return new Remove($possiblePatchOperation);
-                break;
             case 'test':
                 if (!(($this->allowedPatchOperations & Test::APPLY) == Test::APPLY)) {
                     return null;
                 }
 
                 return new Test($possiblePatchOperation);
-                break;
             default:
                 return null;
         }

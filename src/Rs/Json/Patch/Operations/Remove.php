@@ -30,6 +30,7 @@ class Remove extends Operation
      * Guard the mandatory operation properties
      *
      * @param \stdClass $operation The operation structure.
+     * @return void
      */
     protected function assertMandatories(\stdClass $operation)
     {
@@ -43,9 +44,8 @@ class Remove extends Operation
      * @throws \Rs\Json\Pointer\InvalidPointerException
      * @throws \Rs\Json\Pointer\NonWalkableJsonException
      * @throws \RuntimeException
-     * @return string
      */
-    public function perform($targetDocument)
+    public function perform(mixed $targetDocument):string|false
     {
         $pointer = new Pointer($targetDocument);
         try {
@@ -64,7 +64,7 @@ class Remove extends Operation
      * @param array|\stdClass $json         The json_decode'd Json structure.
      * @param array           $pointerParts The parts of the fed pointer.
      */
-    private function remove(&$json, array $pointerParts)
+    private function remove(&$json, array $pointerParts):void
     {
         $pointerPart = array_shift($pointerParts);
 

@@ -1,6 +1,5 @@
 * text=auto eol=lf
 
-/tests export-ignore
 .editorconfig export-ignore
 .gitattributes export-ignore
 .github/ export-ignore
@@ -9,5 +8,7 @@
 CHANGELOG.md export-ignore
 CONTRIBUTING.md export-ignore
 LICENSE.md export-ignore
+phpstan.neon.dist export-ignore
 phpunit.xml.dist export-ignore
 README.md export-ignore
+tests/ export-ignore

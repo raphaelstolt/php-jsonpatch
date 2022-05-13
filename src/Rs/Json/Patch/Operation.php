@@ -62,7 +62,7 @@ abstract class Operation
     }
 
     /**
-     * @return string|array
+     * @return string
      */
     public function getPath()
     {
@@ -83,12 +83,7 @@ abstract class Operation
         );
     }
 
-    /**
-     * @param  mixed $targetDocument
-     *
-     * @return mixed
-     */
-    abstract public function perform($targetDocument);
+    abstract public function perform(mixed $targetDocument): mixed;
 
     /**
      * Guard the mandatory operation properties
@@ -96,6 +91,7 @@ abstract class Operation
      * @param  \stdClass $operation The operation structure.
      *
      * @throws \Rs\Json\Patch\InvalidOperationException
+     * @return void
      */
     abstract protected function assertMandatories(\stdClass $operation);
 }

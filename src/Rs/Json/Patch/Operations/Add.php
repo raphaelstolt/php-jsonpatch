@@ -54,14 +54,11 @@ class Add extends Operation
     }
 
     /**
-     * @param  string $targetDocument
-     *
      * @throws \Rs\Json\Pointer\InvalidJsonException
      * @throws \Rs\Json\Pointer\InvalidPointerException
      * @throws \Rs\Json\Pointer\NonWalkableJsonException
-     * @return string
      */
-    public function perform($targetDocument)
+    public function perform(mixed $targetDocument): mixed
     {
         $pointer = new Pointer($targetDocument);
         $rootGet = array();
