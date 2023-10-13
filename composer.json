@@ -23,7 +23,8 @@
     "require-dev": {
         "phpunit/phpunit": "8.*",
         "friendsofphp/php-cs-fixer": "^3.0",
-        "phpstan/phpstan": "^1.6"
+        "phpstan/phpstan": "^1.6",
+        "stolt/lean-package-validator": "^3.0"
     },
     "autoload": {
         "psr-0": {
@@ -34,7 +35,8 @@
         "test": "phpunit",
         "cs-fix": "php-cs-fixer fix . -vv || true",
         "cs-lint": "php-cs-fixer fix --diff --stop-on-violation --verbose --dry-run",
-        "static-analyse": "phpstan analyse --configuration phpstan.neon.dist"
+        "static-analyse": "phpstan analyse --configuration phpstan.neon.dist",
+        "validate-gitattributes": "lean-package-validator validate"
     },
     "extra": {
         "branch-alias": {
