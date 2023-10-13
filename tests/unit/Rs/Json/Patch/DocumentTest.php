@@ -167,7 +167,7 @@ class DocumentTest extends TestCase
         
         foreach ($operationNames as $index => $operationName) {
             $this->assertInstanceOf(
-                'Rs\Json\Patch\Operations\\' . ucfirst($operationName),
+                'Rs\Json\Patch\Operations\\' . \ucfirst($operationName),
                 $patchOperations[$index]
             );
         }
@@ -178,7 +178,7 @@ class DocumentTest extends TestCase
      */
     public function shouldReturnAnArrayOfPatchOperationsOnPatchDocumentNotContainingTestAndMove()
     {
-        $patchDocument = json_encode(array(
+        $patchDocument = \json_encode(array(
             array('op' => 'test', 'path' => '/a/b/c', 'value' => 'foo'),
             array('op' => 'remove', 'path' => '/a/b/c'),
             array('value' => array('foo', 'bar'), 'path' => '/a/b/c', 'op' => 'add'),
@@ -201,7 +201,7 @@ class DocumentTest extends TestCase
 
         foreach ($operationNames as $index => $operationName) {
             $this->assertInstanceOf(
-                'Rs\Json\Patch\Operations\\' . ucfirst($operationName),
+                'Rs\Json\Patch\Operations\\' . \ucfirst($operationName),
                 $patchOperations[$index]
             );
         }
@@ -212,7 +212,7 @@ class DocumentTest extends TestCase
      */
     public function perDefaultAllPatchOperationsAreAllowed()
     {
-        $patchDocument = json_encode(array(
+        $patchDocument = \json_encode(array(
             array('op' => 'test', 'path' => '/a/b/c', 'value' => 'foo'),
             array('op' => 'remove', 'path' => '/a/b/c'),
             array('value' => array('foo', 'bar'), 'path' => '/a/b/c', 'op' => 'add'),
@@ -237,7 +237,7 @@ class DocumentTest extends TestCase
 
         foreach ($operationNames as $index => $operationName) {
             $this->assertInstanceOf(
-                'Rs\Json\Patch\Operations\\' . ucfirst($operationName),
+                'Rs\Json\Patch\Operations\\' . \ucfirst($operationName),
                 $patchOperations[$index]
             );
         }
@@ -251,7 +251,7 @@ class DocumentTest extends TestCase
     {
         $this->expectException(InvalidOperationException::class);
 
-        $document = new Document(json_encode($invalidPatchDocument));
+        $document = new Document(\json_encode($invalidPatchDocument));
     }
 
     /**
@@ -260,7 +260,7 @@ class DocumentTest extends TestCase
     public function invalidPatchDocumentProvider()
     {
         return array(
-            array(json_encode(array(
+            array(\json_encode(array(
                 array('op' => 'test', 'path' => '/a/b/c', 'valuer' => 'foo'),
                 array('op' => 'test', 'patho' => '/a/b/c', 'value' => 'foo'),
                 array('op' => 'remove', 'patho' => '/a/b/c'),
@@ -282,7 +282,7 @@ class DocumentTest extends TestCase
     public function addPatchDocumentProvider()
     {
         return array(
-            array(json_encode(array(
+            array(\json_encode(array(
                 array('op' => 'add', 'path' => '/a/b/c', 'value' => array('foo', 'bar')),
                 array('path' => '/d/e/f', 'op' => 'add', 'value' => array('baz', 'bbz')),
             ))),
@@ -295,7 +295,7 @@ class DocumentTest extends TestCase
     public function copyPatchDocumentProvider()
     {
         return array(
-            array(json_encode(array(
+            array(\json_encode(array(
                 array('op' => 'copy', 'path' => '/a/b/c', 'from' => '/foo/bar'),
                 array('path' => '/d/e/f', 'op' => 'copy', 'from' => '/baz/bbz'),
             ))),
@@ -308,7 +308,7 @@ class DocumentTest extends TestCase
     public function movePatchDocumentProvider()
     {
         return array(
-            array(json_encode(array(
+            array(\json_encode(array(
                 array('op' => 'move', 'path' => '/a/b/c', 'from' => '/foo/bar'),
                 array('path' => '/d/e/f', 'op' => 'move', 'from' => '/baz/bbz'),
             ))),
@@ -321,7 +321,7 @@ class DocumentTest extends TestCase
     public function removePatchDocumentProvider()
     {
         return array(
-            array(json_encode(array(
+            array(\json_encode(array(
                 array('op' => 'remove', 'path' => '/a/b/c'),
                 array('path' => '/d/e/f', 'op' => 'remove'),
             ))),
@@ -334,7 +334,7 @@ class DocumentTest extends TestCase
     public function replacePatchDocumentProvider()
     {
         return array(
-            array(json_encode(array(
+            array(\json_encode(array(
                 array('op' => 'replace', 'path' => '/a/b/c', 'value' => 42),
                 array('path' => '/d/e/f', 'value' => array('one', 'two'), 'op' => 'replace'),
             ))),
@@ -347,7 +347,7 @@ class DocumentTest extends TestCase
     public function patchDocumentProvider()
     {
         return array(
-            array(json_encode(array(
+            array(\json_encode(array(
                 array('op' => 'test', 'path' => '/a/b/c', 'value' => 'foo'),
                 array('op' => 'remove', 'path' => '/a/b/c'),
                 array('value' => array('foo', 'bar'), 'path' => '/a/b/c', 'op' => 'add'),
@@ -364,7 +364,7 @@ class DocumentTest extends TestCase
     public function patchForTestDocumentProvider()
     {
         return array(
-            array(json_encode(array(
+            array(\json_encode(array(
                 array('op' => 'test', 'path' => '/a/b/c', 'value' => 'foo'),
                 array('op' => 'test', 'path' => '/a/b/c', 'value' => 'bar'),
             ))),
@@ -377,14 +377,14 @@ class DocumentTest extends TestCase
     public function emptyPatchDocumentProvider()
     {
         return array(
-            array(json_encode('')),
-            array(json_encode(" ")),
-            array(json_encode(null)),
-            array(json_encode(false)),
-            array(json_encode(array())),
-            array(json_encode(0)),
-            array(json_encode(17)),
-            array(json_encode('0')),
+            array(\json_encode('')),
+            array(\json_encode(" ")),
+            array(\json_encode(null)),
+            array(\json_encode(false)),
+            array(\json_encode(array())),
+            array(\json_encode(0)),
+            array(\json_encode(17)),
+            array(\json_encode('0')),
         );
     }
 
@@ -394,8 +394,8 @@ class DocumentTest extends TestCase
     public function nonePatchDocumentProvider()
     {
         return array(
-            array(json_encode(array(array('one' => 1, 'two' => 2)))),
-            array(json_encode(array(array('mop' => 'test', 'path' => '/a/b/c')))),
+            array(\json_encode(array(array('one' => 1, 'two' => 2)))),
+            array(\json_encode(array(array('mop' => 'test', 'path' => '/a/b/c')))),
         );
     }
 }

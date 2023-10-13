@@ -47,12 +47,12 @@ class Document
      */
     private function extractPatchOperations(iterable|string $patchDocument)
     {
-        $patchDocument = json_decode($patchDocument);
+        $patchDocument = \json_decode($patchDocument);
 
         if ($this->isEmptyPatchDocument($patchDocument)) {
-            $exceptionMessage = sprintf(
+            $exceptionMessage = \sprintf(
                 "Unable to extract patch operations from '%s'",
-                json_encode($patchDocument)
+                \json_encode($patchDocument)
             );
             throw new InvalidOperationException($exceptionMessage);
         }
@@ -70,7 +70,7 @@ class Document
 
     private function isEmptyPatchDocument(mixed $patchDocument):bool
     {
-        return (empty($patchDocument) || !is_array($patchDocument) || count($patchDocument) === 0);
+        return (empty($patchDocument) || !\is_array($patchDocument) || \count($patchDocument) === 0);
     }
 
     /**
@@ -80,9 +80,9 @@ class Document
     private function patchOperationFactory(\stdClass $possiblePatchOperation)
     {
         if (!isset($possiblePatchOperation->op)) {
-            $exceptionMessage = sprintf(
+            $exceptionMessage = \sprintf(
                 "No operation set for patch operation '%s'",
-                json_encode($possiblePatchOperation)
+                \json_encode($possiblePatchOperation)
             );
             throw new InvalidOperationException($exceptionMessage);
         }

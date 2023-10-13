@@ -35,7 +35,7 @@ class Replace extends Operation
      */
     protected function assertMandatories(\stdClass $operation):void
     {
-        if (!property_exists($operation, 'value')) {
+        if (!\property_exists($operation, 'value')) {
             throw new InvalidOperationException('Mandatory value property not set');
         }
     }
@@ -58,7 +58,7 @@ class Replace extends Operation
             return $targetDocument;
         }
 
-        $targetDocument = json_decode($targetDocument);
+        $targetDocument = \json_decode($targetDocument);
 
         $this->replace(
             $targetDocument,
@@ -66,7 +66,7 @@ class Replace extends Operation
             $this->getValue()
         );
 
-        return json_encode($targetDocument, JSON_UNESCAPED_UNICODE);
+        return \json_encode($targetDocument, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -76,18 +76,18 @@ class Replace extends Operation
      */
     private function replace(&$json, array $pointerParts, $value = null):void
     {
-        $pointerPart = array_shift($pointerParts);
+        $pointerPart = \array_shift($pointerParts);
 
-        if (is_string($this->getValue())) {
-            $value = json_decode($this->getValue());
+        if (\is_string($this->getValue())) {
+            $value = \json_decode($this->getValue());
         }
 
-        if (!is_array($value) && !is_object($value)) {
+        if (!\is_array($value) && !\is_object($value)) {
             $value = $this->getValue();
         }
 
-        if (is_object($json) && array_key_exists($pointerPart, get_object_vars($json))) {
-            if (count($pointerParts) === 0) {
+        if (\is_object($json) && \array_key_exists($pointerPart, \get_object_vars($json))) {
+            if (\count($pointerParts) === 0) {
                 $json->{$pointerPart} = $value;
             } else {
                 $this->replace(
@@ -96,10 +96,10 @@ class Replace extends Operation
                     $value
                 );
             }
-        } elseif ($pointerPart === Pointer::LAST_ARRAY_ELEMENT_CHAR && is_array($json)) {
-            $json[count($json) - 1] = $value;
-        } elseif (is_array($json) && isset($json[$pointerPart])) {
-            if (count($pointerParts) === 0) {
+        } elseif ($pointerPart === Pointer::LAST_ARRAY_ELEMENT_CHAR && \is_array($json)) {
+            $json[\count($json) - 1] = $value;
+        } elseif (\is_array($json) && isset($json[$pointerPart])) {
+            if (\count($pointerParts) === 0) {
                 $json[$pointerPart] = $value;
             } else {
                 $this->replace(

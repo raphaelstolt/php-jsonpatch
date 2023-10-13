@@ -50,7 +50,7 @@ class Move extends Operation
      */
     protected function assertMandatories(\stdClass $operation)
     {
-        if (!property_exists($operation, 'from')) {
+        if (!\property_exists($operation, 'from')) {
             throw new InvalidOperationException('Mandatory from property not set');
         }
     }

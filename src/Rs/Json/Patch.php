@@ -32,13 +32,13 @@ class Patch
      */
     public function __construct($targetDocument, $patchDocument, $allowedPatchOperations = null)
     {
-        json_decode($targetDocument, true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
+        \json_decode($targetDocument, true);
+        if (\json_last_error() !== JSON_ERROR_NONE) {
             throw new InvalidTargetDocumentJsonException('Cannot operate on invalid Json.');
         }
 
-        json_decode($patchDocument, true);
-        if (json_last_error() !== JSON_ERROR_NONE) {
+        \json_decode($patchDocument, true);
+        if (\json_last_error() !== JSON_ERROR_NONE) {
             throw new InvalidPatchDocumentJsonException('Cannot operate on invalid Json.');
         }
 
@@ -55,7 +55,7 @@ class Patch
         $patchOperations = $this->jsonPatchDocument->getPatchOperations();
         $patchedDocument = $this->targetDocument;
 
-        $wasObject = '{' === mb_substr(trim($patchedDocument), 0, 1);
+        $wasObject = '{' === \mb_substr(\trim($patchedDocument), 0, 1);
 
         foreach ($patchOperations as $index => $patchOperation) {
             $targetDocument = $patchOperation->perform($patchedDocument);

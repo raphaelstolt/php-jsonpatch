@@ -54,10 +54,10 @@ class Remove extends Operation
             return $targetDocument;
         }
 
-        $targetDocument = json_decode($targetDocument);
+        $targetDocument = \json_decode($targetDocument);
         $this->remove($targetDocument, $this->getPointerParts());
 
-        return json_encode($targetDocument, JSON_UNESCAPED_UNICODE);
+        return \json_encode($targetDocument, JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -66,13 +66,13 @@ class Remove extends Operation
      */
     private function remove(&$json, array $pointerParts):void
     {
-        $pointerPart = array_shift($pointerParts);
+        $pointerPart = \array_shift($pointerParts);
 
-        if (is_array($json) && isset($json[$pointerPart])) {
-            if (count($pointerParts) === 0) {
+        if (\is_array($json) && isset($json[$pointerPart])) {
+            if (\count($pointerParts) === 0) {
                 unset($json[$pointerPart]);
-                if (ctype_digit($pointerPart)) {
-                    $json = array_values($json);
+                if (\ctype_digit($pointerPart)) {
+                    $json = \array_values($json);
                 }
             } else {
                 $this->remove(
@@ -80,8 +80,8 @@ class Remove extends Operation
                     $pointerParts
                 );
             }
-        } elseif (is_object($json) && isset($json->{$pointerPart})) {
-            if (count($pointerParts) === 0) {
+        } elseif (\is_object($json) && isset($json->{$pointerPart})) {
+            if (\count($pointerParts) === 0) {
                 unset($json->{$pointerPart});
             } else {
                 $this->remove(
@@ -89,12 +89,12 @@ class Remove extends Operation
                     $pointerParts
                 );
             }
-        } elseif ($pointerPart === Pointer::LAST_ARRAY_ELEMENT_CHAR && is_array($json)) {
-            unset($json[count($json) - 1]);
+        } elseif ($pointerPart === Pointer::LAST_ARRAY_ELEMENT_CHAR && \is_array($json)) {
+            unset($json[\count($json) - 1]);
         } else {
             if (null === $pointerPart) {
                 $json = new \stdClass();
-            } elseif (is_object($json)) {
+            } elseif (\is_object($json)) {
                 unset($json->{$pointerPart});
             } else {
                 unset($json[$pointerPart]);

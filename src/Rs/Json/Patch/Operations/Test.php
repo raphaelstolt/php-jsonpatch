@@ -44,7 +44,7 @@ class Test extends Operation
             $get = $pointer->get($this->getPath());
             // Pointer::get() method can return mixed result, we should force type to array for json string
             if ($this->isValidJsonString($get)) {
-                $get = json_decode($get);
+                $get = \json_decode($get);
             }
         } catch (NonexistentValueReferencedException $e) {
             $get = null;
@@ -56,19 +56,19 @@ class Test extends Operation
          * to remain backwards compatible, we support testing a $value of array with non-numeric indexes
          * to a $get of object.. in that case, we cast $value to object
          */
-        if (is_array($value) && !empty($value)) {
+        if (\is_array($value) && !empty($value)) {
             // in if to remain php 5.4 compatible
-            $keys = array_keys($value);
-            if (!ctype_digit((string) $keys[0])) {
+            $keys = \array_keys($value);
+            if (!\ctype_digit((string) $keys[0])) {
                 $value = (object) $value;
             }
         }
 
-        if (is_array($value) && is_array($get)) {
+        if (\is_array($value) && \is_array($get)) {
             return $this->arraysAreIdentical($value, $get);
         }
 
-        if (is_object($value) && is_object($get)) {
+        if (\is_object($value) && \is_object($get)) {
             return ($get == $value);
         }
 
@@ -84,7 +84,7 @@ class Test extends Operation
      */
     protected function assertMandatories(\stdClass $operation):void
     {
-        if (!property_exists($operation, 'value')) {
+        if (!\property_exists($operation, 'value')) {
             throw new InvalidOperationException('Mandatory value property not set');
         }
     }
@@ -94,10 +94,10 @@ class Test extends Operation
      */
     private function isValidJsonString(mixed $string):bool
     {
-        if (is_string($string) && strlen($string)) {
+        if (\is_string($string) && \strlen($string)) {
             // Decode and check last error
-            $result = json_decode($string);
-            return (json_last_error() === JSON_ERROR_NONE) && ($result != $string);
+            $result = \json_decode($string);
+            return (\json_last_error() === JSON_ERROR_NONE) && ($result != $string);
         }
 
         return false;
@@ -111,9 +111,9 @@ class Test extends Operation
      */
     private function arraysAreIdentical(array $value, array $get)
     {
-        asort($get);
-        asort($value);
+        \asort($get);
+        \asort($value);
 
-        return json_encode($get, JSON_UNESCAPED_UNICODE) === json_encode($value, JSON_UNESCAPED_UNICODE);
+        return \json_encode($get, JSON_UNESCAPED_UNICODE) === \json_encode($value, JSON_UNESCAPED_UNICODE);
     }
 }
