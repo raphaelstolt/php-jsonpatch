@@ -24,5 +24,5 @@ jobs:
       - name: Install Composer dependencies
         run: composer update --no-progress --no-suggest --prefer-dist --optimize-autoloader
 
-      - name: Package leanness
+      - name: Validate package leanness
         run: composer run-script validate-gitattributes
