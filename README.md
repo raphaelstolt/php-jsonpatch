@@ -7,7 +7,7 @@ This is an implementation of [JSON Patch](http://tools.ietf.org/html/rfc6902) wr
 ### Installation via Composer
 
 ``` bash
-$ composer require php-jsonpatch/php-jsonpatch
+composer require php-jsonpatch/php-jsonpatch
 ```
 
 ### Usage
@@ -63,7 +63,7 @@ integration tests located under `tests/integration/*`.
 ### Running tests
 
 ``` bash
-$ composer test
+composer test
 ```
 
 ### License
